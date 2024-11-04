@@ -1,0 +1,29 @@
+{
+  "name": "leaderboardbe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && npx tsc",
+    "start": "node dist/index.js",
+    "serve": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.7",
+    "@types/pg": "^8.11.10",
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3"
+  }
+}
