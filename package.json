@@ -13,11 +13,13 @@
   },
   "lint-staged": {
     "leaderboard/leaderboard_fe/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write"
+      "npx prettier --write"
     ],
     "leaderboard/leaderboard_be/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write"
+      "npx prettier --write"
     ],
-    "*.{json,md,yml}": ["prettier --write"]
+    "*.{json,md,yml}": [
+      "npx prettier --write"
+    ]
   }
 }
