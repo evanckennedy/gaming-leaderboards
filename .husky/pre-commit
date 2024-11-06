@@ -1,0 +1,11 @@
+# Check if there are any staged files in the leaderboard_fe directory
+if git diff --cached --name-only | grep -q '^leaderboard/leaderboard_fe/'; then
+  echo "Running Prettier for leaderboard_fe"
+  (npx lint-staged --allow-empty)
+fi
+
+# Check if there are any staged files in the leaderboard_be directory
+if git diff --cached --name-only | grep -q '^leaderboard/leaderboard_be/'; then
+  echo "Running Prettier for leaderboard_be"
+  (npx lint-staged --allow-empty)
+fi
