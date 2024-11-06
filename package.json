@@ -4,7 +4,8 @@
   "description": "This package.json is used to manage Husky pre-commit hooks for both Leaderboard projects.",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "ci:all": "(npm ci && cd leaderboard/leaderboard_fe && echo Running npm ci in frontend && npm ci && cd ../leaderboard_be && echo Running npm ci in backend && npm ci)"
   },
   "author": "",
   "license": "ISC",
