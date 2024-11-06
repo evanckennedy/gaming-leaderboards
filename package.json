@@ -1,0 +1,23 @@
+{
+  "name": "leaderboard-project",
+  "version": "1.0.0",
+  "description": "This package.json is used to manage Husky pre-commit hooks for both Leaderboard projects.",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^9.1.6"
+  },
+  "lint-staged": {
+    "leaderboard/leaderboard_fe/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    "leaderboard/leaderboard_be/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{json,md,yml}": ["prettier --write"]
+  }
+}
