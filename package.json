@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky",
-    "ci:all": "(npm ci && cd leaderboard/leaderboard_fe && npm ci && cd ../leaderboard_be && npm ci)"
+    "ci:all": "(npm ci && cd leaderboard/leaderboard_fe && echo Running npm ci in frontend && npm ci && cd ../leaderboard_be && echo Running npm ci in backend && npm ci)"
   },
   "author": "",
   "license": "ISC",
