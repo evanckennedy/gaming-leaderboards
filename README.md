@@ -1,6 +1,14 @@
 # Leaderboard Project
 
-
+## Installation
+To install all dependencies for this project with one command, use the following command in the root directory:
+```
+> npm run ci:all
+``` 
+This command will automatically install dependencies in:
+- The root directory (leaderboard-project)
+- The frontend (leaderboard/leaderboard_fe)
+- The backend (leaderboard/leaderboard_be)
 
 ## Getting started
 
