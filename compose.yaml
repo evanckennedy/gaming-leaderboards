@@ -1,0 +1,49 @@
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres:17
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass123
+      - POSTGRES_DB=leaderboard_db
+    ports:
+      - 5432:5432
+    volumes: 
+      - ./postgres-db:/var/lib/postgresql/data
+  
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+  backend:
+    container_name: backend_container
+    build:
+      context: ./leaderboard/leaderboard_be
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    command: ["npm", "start"]
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - postgres
+
+  frontend:
+    container_name: frontend_container
+    build:
+      context: ./leaderboard/leaderboard_fe
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

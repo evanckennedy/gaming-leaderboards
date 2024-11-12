@@ -16,5 +16,6 @@
     "jsx": "react-jsx",
     "types": []
   },
+  "exclude": ["vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
