@@ -7,9 +7,9 @@ function SideMenu() {
 
   return (
     <div
-      className={`${isOpen ? "col-span-2" : "col-span-1"} flex flex-col px-4`}
+      className={`${isOpen ? "col-span-2" : "col-span-1"} flex flex-col p-6 3xl:p-9 4xl:p-20`}
     >
-      <button className="mb-8" onClick={toggleMenu}>
+      <button className="mb-12 3xl:mb-14 4xl:mb-32" onClick={toggleMenu}>
         <HamburgerMenuIcon />
       </button>
 

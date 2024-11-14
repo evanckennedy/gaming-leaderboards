@@ -14,6 +14,10 @@ export default {
         paleGreen: "#F2F5EA",
         mutedPurple: "#726E97",
       },
+      screens: {
+        "3xl": "1920px", // Full HD (1080p)
+        "4xl": "3840px", // 4K (3840px)
+      },
     },
   },
   plugins: [],
