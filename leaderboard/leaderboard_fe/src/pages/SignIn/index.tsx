@@ -1,5 +1,13 @@
+import PageTitle from "@/components/ui/PageTitle";
+import SignInForm from "@/features/authentication/components/SignInForm";
+
 function SignIn() {
-  return <div>SignIn</div>;
+  return (
+    <>
+      <PageTitle title="Sign In" />
+      <SignInForm />
+    </>
+  );
 }
 
 export default SignIn;

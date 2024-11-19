@@ -3,7 +3,7 @@ const HamburgerMenuIcon = () => (
     id="Icon_HamburgerMenu"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 50 40"
-    className="hamburger-icon fill-current text-white hover:text-brightOrange transition-colors duration-300 ease-out w-9 3xl:w-16 4xl:w-28"
+    className="hamburger-icon fill-current text-white-100 hover:text-secondary transition-colors duration-300 ease-out w-9 3xl:w-16 4xl:w-28"
   >
     <rect
       id="Rectangle_31"
