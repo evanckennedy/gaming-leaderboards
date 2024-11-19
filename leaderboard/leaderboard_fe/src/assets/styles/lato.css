@@ -14,6 +14,14 @@
   font-style: normal;
 }
 
+/* medium */
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/lato/Lato-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* bold */
 @font-face {
   font-family: 'Lato';
