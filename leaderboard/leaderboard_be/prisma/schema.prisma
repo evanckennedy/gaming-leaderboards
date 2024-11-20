@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id         Int         @id @default(autoincrement())
+  name       String      @db.Char(100)
+  gameGenres GameGenre[]
+  sessions   Session[]
+
+  @@map("game")
+}
+
+model Genre {
+  id         Int         @id @default(autoincrement())
+  name       String      @db.Char(100)
+  gameGenres GameGenre[]
+
+  @@map("genre")
+}
+
+model GameGenre {
+  id      Int   @id @default(autoincrement())
+  gameId  Int   @map("game_id")
+  genreId Int   @map("genre_id")
+  game    Game  @relation(fields: [gameId], references: [id])
+  genre   Genre @relation(fields: [genreId], references: [id])
+
+  @@map("game_genre")
+}
+
+model Session {
+  id             Int             @id @default(autoincrement())
+  gameId         Int             @map("game_id")
+  gameDate       DateTime        @map("game_date") @db.Date
+  game           Game            @relation(fields: [gameId], references: [id])
+  sessionPlayers SessionPlayer[]
+
+  @@map("session")
+}
+
+model Player {
+  id            Int             @id @default(autoincrement())
+  firstName     String          @map("first_name") @db.Char(100)
+  lastName      String          @map("last_name") @db.Char(100)
+  sessionPlayer SessionPlayer[]
+
+  @@map("player")
+}
+
+model SessionPlayer {
+  id        Int     @id @default(autoincrement())
+  sessionId Int     @map("session_id")
+  playerId  Int     @map("player_id")
+  score     Int?
+  placement Int
+  session   Session @relation(fields: [sessionId], references: [id])
+  player    Player  @relation(fields: [playerId], references: [id])
+
+  @@map("session_player")
+}
+
+model Role {
+  id       Int    @id @default(autoincrement())
+  roleName String @map("role_name") @db.Char(50)
+  users    User[]
+
+  @@map("role")
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  roleId            Int      @map("role_id")
+  firstName         String   @map("first_name") @db.Char(100)
+  lastName          String   @map("last_name") @db.Char(100)
+  email             String   @db.Char(100)
+  passwordHash      String   @map("password_hash")
+  accessFailedCount Int      @map("access_failed_count")
+  lastLogin         DateTime @map("last_login") @db.Date
+  lockedOut         Boolean  @map("locked_out")
+  role              Role     @relation(fields: [roleId], references: [id])
+
+  @@map("user")
+}
