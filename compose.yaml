@@ -30,7 +30,7 @@ services:
       context: ./leaderboard/leaderboard_be
       dockerfile: Dockerfile
     ports:
-      - "8234:8000"
+      - "8234:8234"
     working_dir: /app
     command: ["npm", "start"]
     environment:
