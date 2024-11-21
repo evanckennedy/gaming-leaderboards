@@ -14,57 +14,45 @@ This command will automatically install dependencies in:
 
 **Note:** Ensure that both your **pgAdmin** and **PostgreSQL** containers are running before proceeding.
 
-### Step 1: Get the IP Address of Your PostgreSQL Container
-
-1. In your terminal, run the following command:
-   ```
-   docker container ls
-   ```
-   - Copy the container ID of the PostgreSQL container.
-
-2. Run the following command to inspect the container:
-   ```
-   docker inspect <containerID>
-   ```
-   - Look for the key `"IPAddress"` and copy the associated IP address.
-
-### Step 2: Access pgAdmin
+### Step 1: Access pgAdmin
 
 1. Open your web browser and navigate to:
    ```
    http://localhost:5050
    ```
 
-### Step 3: Login to pgAdmin
+### Step 2: Login to pgAdmin
 
 1. Use the following credentials to log in:
    - **Email**: `admin@admin.com`
    - **Password**: `admin`
 
-### Step 4: Add a New Server in pgAdmin
+### Step 3: Add a New Server in pgAdmin
 
 1. In the pgAdmin interface, right-click on "Servers" in the left-hand tree view.
 2. Click on "Register" and then "Server".
 
-### Step 5:  Fill in the Server Details
+### Step 4:  Fill in the Server Details
 
 1. **General Tab**:
    - **Name**: `postgres` (or any name you prefer)
 
 2. **Connection Tab**:
-   - **Host name/address**: Paste the IP address you copied earlier.
+   - **Host name/address**: `postgres` (or IP address of PostgreSQL container)
    - **Port**: `5432`
    - **Username**: `admin`
    - **Password**: `pass123`
 
-### Step 6: Save the Configuration
+### Step 5: Save the Configuration
 
 1. Click on the **Save** button to register the server.
 
-### Step 7: Verify the Server
+### Step 6: Verify the Server
 
 1. In the left-hand tree view, you should see the server.
 2. Click to expand the server dropdown, and then expand the Databases dropdown. You should see `leaderboard_db` listed there.
+
+**Note:** The **pgAdmin** service is configured to persist its data using a Docker volume, so you only need to register the PostgreSQL server once. The server registration and other pgAdmin settings will persist between restarts of the Docker containers.
 
 ## Getting started
 
