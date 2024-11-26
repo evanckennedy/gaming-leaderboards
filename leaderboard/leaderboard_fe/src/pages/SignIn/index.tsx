@@ -1,4 +1,4 @@
-import PageTitle from "@/components/ui/PageTitle";
+import PageTitle from "@/components/ui/pageTitle/PageTitle";
 import SignInForm from "@/features/authentication/components/SignInForm";
 
 function SignIn() {

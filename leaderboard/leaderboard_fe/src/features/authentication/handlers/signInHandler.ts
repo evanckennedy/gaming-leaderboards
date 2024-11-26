@@ -3,7 +3,7 @@ import { SignInFormValues } from "../components/SignInForm";
 
 export const handleSubmit = async (
   values: SignInFormValues,
-  { setErrors }: FormikHelpers<SignInFormValues>,
+  { setErrors, resetForm }: FormikHelpers<SignInFormValues>,
 ) => {
   console.log("form submitting"); // debugging
 
@@ -13,6 +13,8 @@ export const handleSubmit = async (
 
     console.log("Form submitted: ", values); // debugging
     // Add your actual form submission logic here
+
+    resetForm();
   } catch (error) {
     // Handle error response
     setErrors({ email: "An error occurred. Please try again." });

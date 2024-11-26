@@ -54,6 +54,29 @@ This command will automatically install dependencies in:
 
 **Note:** The **pgAdmin** service is configured to persist its data using a Docker volume, so you only need to register the PostgreSQL server once. The server registration and other pgAdmin settings will persist between restarts of the Docker containers.
 
+## Responsiveness Guide
+
+This application is fully responsive and optimized for the following screen sizes:
+
+- **720p (1280 x 720)**: Standard HD resolution  
+- **1080p (1920 x 1080)**: Full HD resolution  
+- **4K (3840 x 2160)**: Ultra HD resolution  
+
+### Tailwind Custom Screen Sizes
+
+The responsiveness is managed using Tailwind CSS, which includes custom screen sizes for **1080p** and **4K** resolutions defined in the `tailwind.config.js` file as follows:
+
+```javascript
+theme: {
+   extend: {
+      screens: {
+         "3xl": "1920px", // Full HD (1080p)
+         "4xl": "3840px", // 4K (3840px)
+      },
+   }
+}
+```
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

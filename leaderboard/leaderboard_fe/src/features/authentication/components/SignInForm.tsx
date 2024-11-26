@@ -29,10 +29,10 @@ const SignInForm = () => {
                 name="email"
                 id="email"
                 className={`text-center bg-primary-200 text-white-100 3xl:text-2xl 4xl:text-5xl border-2 3xl:border-4 4xl:border-8 font-medium shadow-inner-custom-base 3xl:shadow-inner-custom-1080 4xl:shadow-inner-custom-4k hover:bg-primary-100 focus:bg-primary-100 transition-colors duration-300 ease-out h-10 3xl:h-14 4xl:h-28 ${
-                  touched.email && errors.email ? "border-error" : ""
+                  touched.email && errors.email ? "border-error-100" : ""
                 }`}
               />
-              <p className="text-right text-sm 3xl:text-xl 4xl:text-4xl text-error h-4 3xl:h-6 4xl:h-12">
+              <p className="text-right text-sm 3xl:text-xl 4xl:text-4xl text-error-100 h-4 3xl:h-6 4xl:h-12">
                 {touched.email && errors.email ? errors.email : ""}
               </p>
             </div>
@@ -56,10 +56,10 @@ const SignInForm = () => {
                 name="password"
                 id="password"
                 className={`text-center bg-primary-200 text-white-100 3xl:text-2xl 4xl:text-5xl border-2 3xl:border-4 4xl:border-8 font-medium shadow-inner-custom-base 3xl:shadow-inner-custom-1080 4xl:shadow-inner-custom-4k hover:bg-primary-100 focus:bg-primary-100 transition-colors duration-300 ease-out h-10 3xl:h-14 4xl:h-28 ${
-                  touched.password && errors.password ? "border-error" : ""
+                  touched.password && errors.password ? "border-error-100" : ""
                 }`}
               />
-              <p className="text-right text-sm 3xl:text-xl 4xl:text-4xl text-error h-4 3xl:h-6 4xl:h-12">
+              <p className="text-right text-sm 3xl:text-xl 4xl:text-4xl text-error-100 h-4 3xl:h-6 4xl:h-12">
                 {touched.password && errors.password ? errors.password : ""}
               </p>
             </div>
