@@ -14,7 +14,8 @@ export default {
         "white-200": "#F2F5EA", // Small text (e.g., dates)
         "black-100": "#1C0037",
         "black-200": "#1A0034",
-        error: "#FF4D4D", // Error color
+        "error-100": "#FF5050",
+        "error-200": "#FF4D4D",
         success: "#A5FF4D", // Success color
         "information-100": "#FFEE4D", // Information color (lighter)
         "information-200": "#FFDB4D", // Information color (darker)

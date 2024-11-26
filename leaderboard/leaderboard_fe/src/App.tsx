@@ -13,7 +13,7 @@ const App = () => {
         <Header />
         <main className="flex-grow grid grid-cols-12">
           <SideMenu />
-          <div className="col-span-10 py-6 px-16 3xl:py-9 3xl:px-24 4xl:py-20 4xl:px-52">
+          <div className="col-span-10 pt-6 pb-12 px-16 3xl:pt-9 3xl:pb-20 3xl:px-24 4xl:pt-20 4xl:pb-36 4xl:px-52">
             <Routes>
               <Route path="/" element={<Leaderboards />} />
               <Route path="/leaderboards" element={<Leaderboards />} />
