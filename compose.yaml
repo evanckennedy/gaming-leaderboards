@@ -35,7 +35,6 @@ services:
       - "8234:8234"
     working_dir: /app
     environment:
-      - NODE_ENV=production
       - DATABASE_URL=postgresql://admin:pass123@postgres:5432/leaderboard_db
     depends_on:
       - postgres

@@ -1,5 +1,6 @@
 import { FormikHelpers } from "formik";
 import { LeaderboardFormValues } from "@/types/types";
+import axios from "axios";
 
 // In createLeaderboardHandler.ts
 export const handleSubmit = async (
@@ -9,24 +10,25 @@ export const handleSubmit = async (
   try {
     // Convert score and place to numbers
     const playersWithNumbers = values.players.map((player) => ({
-      ...player,
       score: Number(player.score),
       place: Number(player.place),
+      name: player.name.trim(),
     }));
     console.log("submitting..."); // debugging
 
     const submissionValues = {
-      title: values.title,
-      genre: values.genre,
+      gameName: values.title.trim(),
+      genreName: values.genre.trim(),
       players: playersWithNumbers,
     };
 
-    // Proceed with submission using submissionValues
+    // Send POST request to the API
+    const response = await axios.post(
+      "http://localhost:8234/api/leaderboards",
+      submissionValues,
+    );
 
-    // Simulate an API call using a Promise
-    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
-
-    console.log("Form submitted: ", submissionValues);
+    console.log("Form submitted: ", submissionValues); // debugging
 
     // Reset the form to its initial values
     resetForm();
