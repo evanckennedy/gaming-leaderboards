@@ -15,7 +15,7 @@ datasource db {
 
 model Game {
   id         Int         @id @default(autoincrement())
-  name       String      @db.Char(100)
+  name       String      @unique @db.Char(100)
   gameGenres GameGenre[]
   sessions   Session[]
 
@@ -24,7 +24,7 @@ model Game {
 
 model Genre {
   id         Int         @id @default(autoincrement())
-  name       String      @db.Char(100)
+  name       String      @unique @db.Char(100)
   gameGenres GameGenre[]
 
   @@map("genre")
@@ -38,12 +38,13 @@ model GameGenre {
   genre   Genre @relation(fields: [genreId], references: [id])
 
   @@map("game_genre")
+  @@unique([gameId, genreId])
 }
 
 model Session {
   id             Int             @id @default(autoincrement())
   gameId         Int             @map("game_id")
-  gameDate       DateTime        @map("game_date") @db.Date
+  gameDate       DateTime        @default(now()) @map("game_date") @db.Date
   game           Game            @relation(fields: [gameId], references: [id])
   sessionPlayers SessionPlayer[]
 
@@ -57,6 +58,7 @@ model Player {
   sessionPlayer SessionPlayer[]
 
   @@map("player")
+  @@unique([firstName, lastName])
 }
 
 model SessionPlayer {
@@ -67,7 +69,7 @@ model SessionPlayer {
   placement Int
   session   Session @relation(fields: [sessionId], references: [id])
   player    Player  @relation(fields: [playerId], references: [id])
-
+  
   @@map("session_player")
 }
 
