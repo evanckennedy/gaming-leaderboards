@@ -28,7 +28,7 @@ export const handleSubmit = async (
       submissionValues,
     );
 
-    console.log("Form submitted: ", submissionValues); // debugging
+    console.log("Response data: ", response.data); // debugging
 
     // Reset the form to its initial values
     resetForm();
