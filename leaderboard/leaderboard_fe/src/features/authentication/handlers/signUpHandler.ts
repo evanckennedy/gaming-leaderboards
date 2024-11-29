@@ -1,5 +1,6 @@
 import { FormikHelpers } from "formik";
 import { SignUpFormValues } from "../components/SignUpForm";
+import axios from "axios";
 
 export const handleSubmit = async (
   values: SignUpFormValues,
@@ -8,11 +9,13 @@ export const handleSubmit = async (
   console.log("form submitting"); // debugging
 
   try {
-    // Simulate an API call using a Promise
-    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+    const response = await axios.post(
+      "http://localhost:8234/api/users/signup",
+      values,
+    );
+    const { token, user } = response.data;
 
-    console.log("Form submitted: ", values); // debugging
-    // Add your actual form submission logic here
+    console.log("Form submitted: ", response.data); // debugging
 
     resetForm();
   } catch (error) {

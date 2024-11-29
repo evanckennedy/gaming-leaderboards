@@ -1,6 +1,10 @@
 import express from "express";
 import leaderboardRoutes from "./src/routes/leaderboardRoutes";
+import authRoutes from "./src/routes/authRoutes";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const PORT = 8234;
@@ -26,6 +30,7 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/api", leaderboardRoutes);
+app.use("/api", authRoutes);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Now listening on port ${PORT}`);
