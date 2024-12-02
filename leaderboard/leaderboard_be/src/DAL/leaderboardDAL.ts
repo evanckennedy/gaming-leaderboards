@@ -1,6 +1,30 @@
 import prisma from "./prismaClient";
 import { LeaderboardFormValues } from "../types/types";
 
+/**
+ * Creates a leaderboard in the database.
+ *
+ * This function handles the creation of a game, genre, and session, and links players to the session.
+ *
+ * Game and Genre Logic:
+ * - Check if the game with the provided name exists:
+ *   - If it exists, use that game.
+ *   - If not, create the game.
+ * - Add the genre to the game:
+ *   - If the genre exists, associate it with the game.
+ *   - If not, create the genre and associate it.
+ *
+ * Session Logic:
+ * - Create a session entry.
+ * - For each player:
+ *   - Check if the player exists using first and last name:
+ *     - If the player exists, use that player.
+ *     - If not, create a new player.
+ *   - Create a sessionPlayer entry, associating the player with their score and placement for that session.
+ *
+ * @param data - The data for creating the leaderboard, including game name, genre name, and player information.
+ * @returns A promise that resolves with the created leaderboard data, including game, genre, and session information.
+ */
 export async function createLeaderboardDAL(data: LeaderboardFormValues) {
   const { gameName, genreName, players } = data;
 

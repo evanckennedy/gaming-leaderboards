@@ -1,6 +1,13 @@
 import { SignUpDALValues } from "../types/types";
 import prisma from "./prismaClient";
 
+/**
+ * Creates a new user in the database.
+ *
+ * @param data - The user sign-up data.
+ * @returns A promise that resolves with the created user.
+ * @throws An error if the default role is not found or if the email is already in use.
+ */
 export async function signUpDAL(data: SignUpDALValues) {
   const { firstName, lastName, email, passwordHash } = data;
 
@@ -38,6 +45,13 @@ export async function signUpDAL(data: SignUpDALValues) {
   }
 }
 
+/**
+ * Retrieves a user from the database by email.
+ *
+ * @param email - The email of the user to retrieve.
+ * @returns- A promise that resolves with the retrieved user.
+ * @throws An error if the user cannot be retrieved.
+ */
 export async function signInDAL(email: string) {
   try {
     const user = await prisma.user.findUnique({

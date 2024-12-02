@@ -3,6 +3,15 @@ import bcrypt from "bcrypt";
 import { signInDAL, signUpDAL } from "../DAL/authDAL";
 import jwt from "jsonwebtoken";
 
+/**
+ * Handles the business logic for user sign-up.
+ *
+ * Hashes the password before adding it to the database
+ * After the user has been created, generate a JWT
+ *
+ * @param data - The user sign-up data.
+ * @returns - A promise that resolves with the created user and JWT.
+ */
 export async function signUpBLL(data: SignUpFormValues) {
   const { firstName, lastName, email, password } = data;
 
@@ -26,6 +35,16 @@ export async function signUpBLL(data: SignUpFormValues) {
   return { user, token };
 }
 
+/**
+ * Handles the business logic for user sign-in.
+ *
+ * If the user is found from the database, use bcrypt to compare the submitted password with the stored password
+ * If the passwords don't match, throw an error
+ * If the passwords match, create a JWT
+ *
+ * @param data - The user sign-up data.
+ * @returns - A promise that resolves with the created user and JWT.
+ */
 export async function signInBLL(data: SignInFormValues) {
   const { email, password } = data;
 
