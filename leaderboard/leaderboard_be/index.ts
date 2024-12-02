@@ -1,28 +1,28 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import leaderboardRoutes from "./src/routes/leaderboardRoutes";
 import authRoutes from "./src/routes/authRoutes";
 import cors from "cors";
 import dotenv from "dotenv";
+import MiddlewareServices from "./src/middleware/middleware";
 
 dotenv.config();
 
 const app = express();
 const PORT = 8234;
 
-// Middleware to parse JSON request bodies into JavaScript objects
-app.use(express.json());
-
 app.use(
   cors({
-    origin: [
-      "http://localhost:8234",
-      "http://localhost:5173",
-      "http://localhost:8080",
-      "http://192.168.0.218:8234/",
-      "http://192.168.0.218:5173/",
-    ],
+    origin: "*",
   }),
 );
+
+// Middleware to parse JSON request bodies into JavaScript objects
+app.use(express.json());
+app.use(express.static("public"));
+// Middleware to verify the preflight request for cors
+app.use((req: Request, res: Response, next: NextFunction) => {
+  MiddlewareServices.verifyPreFlightRequest(req, res, next);
+});
 
 // Test API
 app.get("/test", (req, res) => {
