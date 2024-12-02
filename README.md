@@ -77,6 +77,40 @@ theme: {
 }
 ```
 
+## Docker Environment Setup
+
+### Production Environment
+
+We have consolidated all production-specific configurations into a single `compose.yaml` file. This is our **default production configuration**.
+
+#### Command to Spin Up the Production Environment
+To start the production environment, simply use the following command:
+```
+docker compose up -d --build
+```
+
+#### Command to Turn Off the Production Environment
+To stop and remove the running containers, networks, and volumes (if necessary), use:
+```
+docker compose down
+```
+
+### Development Environment
+
+The `compose.dev.yaml` file contains development-specific configurations.
+
+#### Command to Spin Up the Development Environment
+To start the development environment with the additional configurations from `compose.dev.yaml`, use the following command:
+```
+docker compose -f compose.yaml -f compose.dev.yaml up -d --build
+```
+
+#### Command to Turn Off the Development Environment
+To stop and remove the containers and services from the development environment, use:
+```
+docker compose -f compose.yaml -f compose.dev.yaml down
+```
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

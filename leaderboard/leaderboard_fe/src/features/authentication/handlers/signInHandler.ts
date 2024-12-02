@@ -2,6 +2,8 @@ import { FormikHelpers } from "formik";
 import { SignInFormValues } from "../components/SignInForm";
 import axios from "axios";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
+
 export const handleSubmit = async (
   values: SignInFormValues,
   { setErrors, resetForm }: FormikHelpers<SignInFormValues>,
@@ -16,7 +18,7 @@ export const handleSubmit = async (
     };
 
     const response = await axios.post(
-      "http://localhost:8234/api/users/signin",
+      `${apiBaseUrl}/api/users/signin`,
       trimmedValues,
     );
     const { token, user } = response.data;

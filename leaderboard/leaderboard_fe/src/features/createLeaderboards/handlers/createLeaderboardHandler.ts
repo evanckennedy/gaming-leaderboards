@@ -2,6 +2,8 @@ import { FormikHelpers } from "formik";
 import { LeaderboardFormValues } from "@/types/types";
 import axios from "axios";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
+
 // In createLeaderboardHandler.ts
 export const handleSubmit = async (
   values: LeaderboardFormValues,
@@ -24,7 +26,7 @@ export const handleSubmit = async (
 
     // Send POST request to the API
     const response = await axios.post(
-      "http://localhost:8234/api/leaderboards",
+      `${apiBaseUrl}/api/leaderboards`,
       submissionValues,
     );
 

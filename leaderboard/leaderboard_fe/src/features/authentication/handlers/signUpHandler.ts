@@ -2,6 +2,8 @@ import { FormikHelpers } from "formik";
 import { SignUpFormValues } from "../components/SignUpForm";
 import axios from "axios";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
+
 export const handleSubmit = async (
   values: SignUpFormValues,
   { setErrors, resetForm }: FormikHelpers<SignUpFormValues>,
@@ -17,10 +19,8 @@ export const handleSubmit = async (
       password: values.password,
     };
 
-    console.log("trimmed values: ", trimmedValues); // debugging
-
     const response = await axios.post(
-      "http://localhost:8234/api/users/signup",
+      `${apiBaseUrl}/api/users/signup`,
       trimmedValues,
     );
     const { token, user } = response.data;
