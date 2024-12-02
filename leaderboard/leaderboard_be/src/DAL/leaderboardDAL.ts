@@ -28,21 +28,21 @@ import { LeaderboardFormValues } from "../types/types";
 export async function createLeaderboardDAL(data: LeaderboardFormValues) {
   const { gameName, genreName, players } = data;
 
-  // Upsert game: if a game with the given name exists, update it; otherwise,
-  // create a new game
-  const game = await prisma.game.upsert({
-    where: { name: gameName },
-    update: {},
-    create: { name: gameName },
+  // Find or create game
+  let game = await prisma.game.findFirst({
+    where: { name: { equals: gameName, mode: "insensitive" } },
   });
+  if (!game) {
+    game = await prisma.game.create({ data: { name: gameName } });
+  }
 
-  // Upsert genre: if a genre with the given name exits, update it; otherwise,
-  // create a new genre
-  const genre = await prisma.genre.upsert({
-    where: { name: genreName },
-    update: {},
-    create: { name: genreName },
+  // Find or create genre
+  let genre = await prisma.genre.findFirst({
+    where: { name: { equals: genreName, mode: "insensitive" } },
   });
+  if (!genre) {
+    genre = await prisma.genre.create({ data: { name: genreName } });
+  }
 
   // Upsert gameGenre: Link game and genre if not already linked already linked
   await prisma.gameGenre.upsert({
@@ -66,17 +66,23 @@ export async function createLeaderboardDAL(data: LeaderboardFormValues) {
     },
   });
 
-  // Handle players and link with the session: Upsert each player and link them
-  // to the session
+  // Handle players and link with the session: Find or create each player and
+  // link them to the session
   for (const player of players) {
     const [firstName, ...lastNameParts] = player.name.split(/\s+/);
     const lastName = lastNameParts.join(" ") || "Unknown";
 
-    let playerRecord = await prisma.player.upsert({
-      where: { firstName_lastName: { firstName, lastName } },
-      update: {},
-      create: { firstName, lastName },
+    let playerRecord = await prisma.player.findFirst({
+      where: {
+        firstName: { equals: firstName, mode: "insensitive" },
+        lastName: { equals: lastName, mode: "insensitive" },
+      },
     });
+    if (!playerRecord) {
+      playerRecord = await prisma.player.create({
+        data: { firstName, lastName },
+      });
+    }
 
     await prisma.sessionPlayer.create({
       data: {
