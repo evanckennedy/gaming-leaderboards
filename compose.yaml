@@ -44,10 +44,13 @@ services:
     build:
       context: ./leaderboard/leaderboard_fe
       dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://192.168.0.218:8234
     ports:
       - "5173:80"
     depends_on:
       - backend
+
 volumes:
   pgadmin-data:
   postgres-data:
