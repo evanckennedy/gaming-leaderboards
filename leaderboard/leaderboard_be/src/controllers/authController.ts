@@ -3,6 +3,12 @@ import { SignInFormValues, SignUpFormValues } from "../types/types";
 import { signUpBLL } from "../BLL/authBLL";
 import { signInBLL } from "../BLL/authBLL";
 
+/**
+ * Handles user sign-up.
+ *
+ * If an error occurs during the process, it returns a 500 status code with the error message.
+ * Otherwise, it returns the non-sensitive user information along with a JWT
+ */
 export async function signUp(req: Request, res: Response) {
   try {
     const { firstName, lastName, email, password } =
@@ -30,6 +36,12 @@ export async function signUp(req: Request, res: Response) {
   }
 }
 
+/**
+ * Handles user sign-in.
+ *
+ * If an error occurs during the process, it returns a 401 status code with the error message.
+ * Otherwise, it returns the non-sensitive user information along with a JWT
+ */
 export async function signIn(req: Request, res: Response) {
   try {
     const { email, password } = req.body as SignInFormValues;
