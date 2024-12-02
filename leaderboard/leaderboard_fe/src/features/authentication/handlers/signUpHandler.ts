@@ -9,9 +9,19 @@ export const handleSubmit = async (
   console.log("form submitting"); // debugging
 
   try {
+    // Trim leading and trailing spaces for all inputs except the password
+    const trimmedValues = {
+      firstName: values.firstName.trim(),
+      lastName: values.lastName.trim(),
+      email: values.email.trim(),
+      password: values.password,
+    };
+
+    console.log("trimmed values: ", trimmedValues); // debugging
+
     const response = await axios.post(
       "http://localhost:8234/api/users/signup",
-      values,
+      trimmedValues,
     );
     const { token, user } = response.data;
 

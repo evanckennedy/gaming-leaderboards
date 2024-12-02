@@ -1,5 +1,6 @@
 import { FormikHelpers } from "formik";
 import { SignInFormValues } from "../components/SignInForm";
+import axios from "axios";
 
 export const handleSubmit = async (
   values: SignInFormValues,
@@ -8,11 +9,19 @@ export const handleSubmit = async (
   console.log("form submitting"); // debugging
 
   try {
-    // Simulate an API call using a Promise
-    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+    // Trim the email before submitting
+    const trimmedValues = {
+      email: values.email.trim(),
+      password: values.password,
+    };
 
-    console.log("Form submitted: ", values); // debugging
-    // Add your actual form submission logic here
+    const response = await axios.post(
+      "http://localhost:8234/api/users/signin",
+      trimmedValues,
+    );
+    const { token, user } = response.data;
+
+    console.log("Form submitted: ", response.data); // debugging
 
     resetForm();
   } catch (error) {
