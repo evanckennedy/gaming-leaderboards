@@ -17,3 +17,8 @@ export interface SignUpDALValues {
   email: string;
   passwordHash: string;
 }
+
+export interface SignInFormValues {
+  email: string;
+  password: string;
+}

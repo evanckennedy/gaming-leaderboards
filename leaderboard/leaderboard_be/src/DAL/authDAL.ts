@@ -37,3 +37,15 @@ export async function signUpDAL(data: SignUpDALValues) {
     }
   }
 }
+
+export async function signInDAL(email: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+      include: { role: true },
+    });
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}

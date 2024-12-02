@@ -25,7 +25,7 @@ const SignInForm = () => {
                 Email
               </label>
               <Field
-                type="email"
+                type="text"
                 name="email"
                 id="email"
                 className={`text-center bg-primary-200 text-white-100 3xl:text-2xl 4xl:text-5xl border-2 3xl:border-4 4xl:border-8 font-medium shadow-inner-custom-base 3xl:shadow-inner-custom-1080 4xl:shadow-inner-custom-4k hover:bg-primary-100 focus:bg-primary-100 transition-colors duration-300 ease-out h-10 3xl:h-14 4xl:h-28 ${
