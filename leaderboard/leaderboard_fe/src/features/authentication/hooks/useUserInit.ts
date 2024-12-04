@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { setCredentials, logout } from "../slices/userSlice";
 import { DecodedToken } from "@/types/types";
+import { setLogoutTimer } from "@/utils/authUtils";
 
 /**
  * Hook to check if a user is already logged in
@@ -32,6 +33,7 @@ const useUserInit = () => {
             roleName: decodedToken.roleName,
           }),
         );
+        setLogoutTimer(decodedToken.exp, dispatch);
       } else {
         // Token has expired
         localStorage.removeItem("token");
