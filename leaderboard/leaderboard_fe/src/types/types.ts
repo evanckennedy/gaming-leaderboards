@@ -9,3 +9,10 @@ export interface LeaderboardFormValues {
   genre: string;
   players: Player[];
 }
+
+export interface DecodedToken {
+  userId: string;
+  roleName: string;
+  exp: number; // Expiry timestamp
+  iat: number; // Issued at timestamp
+}

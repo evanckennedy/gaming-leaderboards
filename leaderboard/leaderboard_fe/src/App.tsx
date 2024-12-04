@@ -5,8 +5,11 @@ import Leaderboards from "./pages/Leaderboards";
 import CreateNew from "./pages/CreateNew";
 import Users from "./pages/Users";
 import SignIn from "./pages/SignIn";
+import useUserInit from "./features/authentication/hooks/useUserInit";
 
 const App = () => {
+  useUserInit();
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
