@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types/types";
 import { setCredentials } from "../slices/userSlice";
 import { store } from "@/store/store";
+import { setLogoutTimer } from "@/utils/authUtils";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
 
@@ -40,12 +41,17 @@ export const handleSubmit = async (
 
     console.log(decodedToken); // debugging
 
-    store.dispatch(
+    const dispatch = store.dispatch;
+
+    dispatch(
       setCredentials({
         userId: decodedToken.userId,
         roleName: decodedToken.roleName,
       }),
     );
+
+    // Set up the logout timer
+    setLogoutTimer(decodedToken.exp, dispatch);
 
     resetForm();
   } catch (error) {
