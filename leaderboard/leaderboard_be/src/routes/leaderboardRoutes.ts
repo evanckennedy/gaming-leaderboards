@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { createLeaderboard } from "../controllers/leaderboardController";
+import {
+  createLeaderboard,
+  getLeaderboards,
+} from "../controllers/leaderboardController";
 
 const router = Router();
 
 router.post("/leaderboards", createLeaderboard);
+router.get("/leaderboards", getLeaderboards);
 
 export default router;
