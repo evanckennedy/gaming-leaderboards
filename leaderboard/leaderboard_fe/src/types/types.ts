@@ -1,4 +1,4 @@
-export interface Player {
+export interface LeaderboardFormPlayer {
   name: string;
   score: string;
   place: string;
@@ -7,7 +7,7 @@ export interface Player {
 export interface LeaderboardFormValues {
   title: string;
   genre: string;
-  players: Player[];
+  players: LeaderboardFormPlayer[];
 }
 
 export interface DecodedToken {
@@ -15,4 +15,30 @@ export interface DecodedToken {
   roleName: string;
   exp: number; // Expiry timestamp
   iat: number; // Issued at timestamp
+}
+
+export interface Player {
+  firstName: string;
+  lastName: string;
+}
+
+export interface SessionPlayer {
+  id: number;
+  sessionId: number;
+  playerId: number;
+  score: number;
+  placement: number;
+  player: Player;
+}
+
+export interface Game {
+  name: string;
+}
+
+export interface Leaderboard {
+  id: number;
+  gameId: number;
+  gameDate: string;
+  game: Game;
+  sessionPlayers: SessionPlayer[];
 }

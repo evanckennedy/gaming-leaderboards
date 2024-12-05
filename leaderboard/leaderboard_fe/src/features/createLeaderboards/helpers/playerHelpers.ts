@@ -1,6 +1,6 @@
-import { Player } from "@/types/types";
+import { LeaderboardFormPlayer } from "@/types/types";
 
-interface PlayerWithIndex extends Player {
+interface PlayerWithIndex extends LeaderboardFormPlayer {
   originalIndex: number;
 }
 
@@ -14,7 +14,9 @@ interface PlayerWithIndex extends Player {
  * @param players - Array of player objects.
  * @returns Array of players with originalIndex added.
  */
-export function addOriginalIndex(players: Player[]): PlayerWithIndex[] {
+export function addOriginalIndex(
+  players: LeaderboardFormPlayer[],
+): PlayerWithIndex[] {
   return players.map((player, index) => ({
     ...player,
     originalIndex: index,

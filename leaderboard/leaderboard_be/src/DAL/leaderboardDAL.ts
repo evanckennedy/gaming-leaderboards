@@ -97,3 +97,30 @@ export async function createLeaderboardDAL(data: LeaderboardFormValues) {
   // Return the created data
   return { game, genre, session };
 }
+
+/**
+ * Fetches all leaderboards with game name, game date, and player details.
+ *
+ * @returns A promise that resolves with the leaderboard data.
+ */
+export async function getLeaderboardsDAL() {
+  return await prisma.session.findMany({
+    include: {
+      game: {
+        select: {
+          name: true,
+        },
+      },
+      sessionPlayers: {
+        include: {
+          player: {
+            select: {
+              firstName: true,
+              lastName: true,
+            },
+          },
+        },
+      },
+    },
+  });
+}

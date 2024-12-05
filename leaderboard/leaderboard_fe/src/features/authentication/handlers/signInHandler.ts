@@ -1,13 +1,11 @@
 import { FormikHelpers } from "formik";
 import { SignInFormValues } from "../components/SignInForm";
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types/types";
 import { setCredentials } from "../slices/userSlice";
 import { store } from "@/store/store";
 import { setLogoutTimer } from "@/utils/authUtils";
-
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
+import { signInUser } from "@/services/userService";
 
 export const handleSubmit = async (
   values: SignInFormValues,
@@ -22,10 +20,7 @@ export const handleSubmit = async (
       password: values.password,
     };
 
-    const response = await axios.post(
-      `${apiBaseUrl}/api/users/signin`,
-      trimmedValues,
-    );
+    const response = await signInUser(trimmedValues);
 
     console.log("Form submitted: ", response.data); // debugging
 

@@ -1,5 +1,8 @@
 import { LeaderboardFormValues } from "../types/types";
-import { createLeaderboardDAL } from "../DAL/leaderboardDAL";
+import {
+  createLeaderboardDAL,
+  getLeaderboardsDAL,
+} from "../DAL/leaderboardDAL";
 
 /**
  * Handles the business logic for creating a leaderboard.
@@ -9,4 +12,13 @@ import { createLeaderboardDAL } from "../DAL/leaderboardDAL";
  */
 export async function createLeaderboardBLL(data: LeaderboardFormValues) {
   return await createLeaderboardDAL(data);
+}
+
+/**
+ * Handles the business logic for fetching leaderboards.
+ *
+ * @returns A promise that resolves with the leaderboard data.
+ */
+export async function getLeaderboardsBLL() {
+  return await getLeaderboardsDAL();
 }

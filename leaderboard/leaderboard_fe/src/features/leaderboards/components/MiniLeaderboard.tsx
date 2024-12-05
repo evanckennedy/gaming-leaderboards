@@ -1,13 +1,23 @@
-function MiniLeaderboard() {
+interface MiniLeaderboardProps {
+  title: string;
+  sessionDate: string;
+  players: { fullName: string; placement: number; score: number }[];
+}
+
+function MiniLeaderboard({
+  title,
+  sessionDate,
+  players,
+}: MiniLeaderboardProps) {
   return (
     <div className="transform transition-transform duration-300 ease-out hover:scale-105 cursor-pointer">
       <div className="bg-gradient-to-b from-primary-300 to-primary-400 relative flex items-center justify-center h-16 3xl:h-24 4xl:h-48">
-        <p className="absolute top-0 right-0 m-1 4xl:m-3 text-white-200 font-light text-xs 3xl:text-lg 4xl:text-4xl">
+        <p className="absolute top-0 right-0 m-1 3xl:m-1.5 4xl:m-3 text-white-200 font-light text-xs 3xl:text-lg 4xl:text-4xl">
           <span>Latest:</span>
-          <span> 10/30/2024</span>
+          <span> {sessionDate}</span>
         </p>
-        <h3 className="text-center text-white-100 font-black text-xl 3xl:text-3xl 4xl:text-6xl">
-          Leaderboard Title
+        <h3 className="text-center px-4 3xl:px-4 4xl:px-9 text-white-100 font-black text-xl 3xl:text-3xl 4xl:text-6xl truncate">
+          {title}
         </h3>
       </div>
       <div className="bg-primary-100 pb-4 3xl:pb-6 4xl:pb-12">
@@ -22,27 +32,31 @@ function MiniLeaderboard() {
             </tr>
           </thead>
           <tbody>
-            <tr className="odd:bg-primary-200 even:bg-primary-100">
-              <td className="pl-3 py-1 3xl:pl-4 3xl:py-2 4xl:pl-9 4xl:py-3">
-                1.
-              </td>
-              <td>First Name Last Name</td>
-              <td className="text-right pr-3 3xl:pr-4 4xl:pr-9">12</td>
-            </tr>
-            <tr className="odd:bg-primary-200 even:bg-primary-100">
-              <td className="pl-3 py-1 3xl:pl-4 3xl:py-2 4xl:pl-9 4xl:py-3">
-                2.
-              </td>
-              <td>First Name Last Name</td>
-              <td className="text-right pr-3 3xl:pr-4 4xl:pr-9">11</td>
-            </tr>
-            <tr className="odd:bg-primary-200 even:bg-primary-100">
-              <td className="pl-3 py-1 3xl:pl-4 3xl:py-2 4xl:pl-9 4xl:py-3">
-                3.
-              </td>
-              <td>First Name Last Name</td>
-              <td className="text-right pr-3 3xl:pr-4 4xl:pr-9">9</td>
-            </tr>
+            {players.map((player) => (
+              <tr
+                key={player.placement}
+                className="odd:bg-primary-200 even:bg-primary-100"
+              >
+                {/* Use 'opacity-0' to hide placeholder rows while keeping the space */}
+                <td
+                  className={`pl-3 py-1 3xl:pl-4 3xl:py-2 4xl:pl-9 4xl:py-3 ${
+                    player.fullName === "N/A" ? "opacity-0" : ""
+                  }`}
+                >
+                  {player.placement}.
+                </td>
+                <td className={player.fullName === "N/A" ? "opacity-0" : ""}>
+                  {player.fullName}
+                </td>
+                <td
+                  className={`text-right pr-3 3xl:pr-4 4xl:pr-9 ${
+                    player.fullName === "N/A" ? "opacity-0" : ""
+                  }`}
+                >
+                  {player.score}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
