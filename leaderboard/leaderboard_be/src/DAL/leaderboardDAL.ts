@@ -21,9 +21,6 @@ import { LeaderboardFormValues } from "../types/types";
  *     - If the player exists, use that player.
  *     - If not, create a new player.
  *   - Create a sessionPlayer entry, associating the player with their score and placement for that session.
- *
- * @param data - The data for creating the leaderboard, including game name, genre name, and player information.
- * @returns A promise that resolves with the created leaderboard data, including game, genre, and session information.
  */
 export async function createLeaderboardDAL(data: LeaderboardFormValues) {
   const { gameName, genreName, players } = data;
@@ -100,8 +97,6 @@ export async function createLeaderboardDAL(data: LeaderboardFormValues) {
 
 /**
  * Fetches all leaderboards with game name, game date, and player details.
- *
- * @returns A promise that resolves with the leaderboard data.
  */
 export async function getLeaderboardsDAL() {
   return await prisma.session.findMany({

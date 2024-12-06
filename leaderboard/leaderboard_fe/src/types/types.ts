@@ -42,3 +42,18 @@ export interface Leaderboard {
   game: Game;
   sessionPlayers: SessionPlayer[];
 }
+
+export interface User {
+  id: number;
+  roleId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  passwordHash: string;
+  accessFailedCount: number;
+  lastLogin: Date;
+  lockedOut: boolean;
+  role: {
+    roleName: string;
+  };
+}

@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import leaderboardRoutes from "./src/routes/leaderboardRoutes";
 import authRoutes from "./src/routes/authRoutes";
+import userRoutes from "./src/routes/userRoutes";
 import cors from "cors";
 import dotenv from "dotenv";
 import MiddlewareServices from "./src/middleware/middleware";
@@ -31,6 +32,7 @@ app.get("/test", (req, res) => {
 
 app.use("/api", leaderboardRoutes);
 app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Now listening on port ${PORT}`);

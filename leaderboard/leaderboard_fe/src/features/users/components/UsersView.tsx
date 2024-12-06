@@ -1,82 +1,18 @@
 import IconEdit from "@/components/ui/icons/IconEdit";
 import IconResetPassword from "@/components/ui/icons/IconResetPassword";
 import IconTrash from "@/components/ui/icons/IconTrash";
-
-// This will be replaced with the actual users in the database
-const users = [
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Admin",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-  {
-    firstName: "First Name",
-    lastName: "Last Name",
-    email: "Email@bsdxr.com",
-    password: "*************",
-    role: "Viewer",
-  },
-];
+import { useUsers } from "../hooks/useUsers";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 function UsersView() {
+  const {
+    users,
+    isModalOpen,
+    handleDeleteClick,
+    handleConfirmDelete,
+    handleCloseModal,
+  } = useUsers();
+
   return (
     <div className="mt-16 3xl:mt-24 4xl:mt-48">
       <table className="w-full text-left">
@@ -100,18 +36,46 @@ function UsersView() {
                 <span>{user.lastName}</span>
               </td>
               <td className="font-medium">{user.email}</td>
-              <td className="font-medium">{user.password}</td>
-              <td className="font-medium">{user.role}</td>
+              <td className="font-medium">*************</td>
+              <td className="font-medium">{user.role.roleName}</td>
               <td>
                 <div className="flex gap-5 3xl:gap-8 4xl:gap-16">
-                  <button type="button">
-                    <IconEdit className="w-auto h-5 3xl:h-8 4xl:h-16 fill-current text-white-100 hover:text-secondary transition-colors duration-300 ease-out" />
+                  <button
+                    type="button"
+                    disabled={user.role.roleName === "Root"}
+                  >
+                    <IconEdit
+                      className={`w-auto h-5 3xl:h-8 4xl:h-16 fill-current ${
+                        user.role.roleName === "Root" ?
+                          "text-gray-400 cursor-not-allowed"
+                        : "text-white-100 hover:text-error-100 transition-colors duration-300 ease-out"
+                      }`}
+                    />
                   </button>
-                  <button type="button">
-                    <IconResetPassword className="w-auto h-5 3xl:h-8 4xl:h-16 fill-current text-white-100 hover:text-secondary transition-colors duration-300 ease-out" />
+                  <button
+                    type="button"
+                    disabled={user.role.roleName === "Root"}
+                  >
+                    <IconResetPassword
+                      className={`w-auto h-5 3xl:h-8 4xl:h-16 fill-current ${
+                        user.role.roleName === "Root" ?
+                          "text-gray-400 cursor-not-allowed"
+                        : "text-white-100 hover:text-error-100 transition-colors duration-300 ease-out"
+                      }`}
+                    />
                   </button>
-                  <button type="button">
-                    <IconTrash className="w-auto h-5 3xl:h-8 4xl:h-16 fill-current text-white-100 hover:text-error-100 transition-colors duration-300 ease-out" />
+                  <button
+                    type="button"
+                    disabled={user.role.roleName === "Root"}
+                    onClick={() => handleDeleteClick(user.id)}
+                  >
+                    <IconTrash
+                      className={`w-auto h-5 3xl:h-8 4xl:h-16 fill-current ${
+                        user.role.roleName === "Root" ?
+                          "text-gray-400 cursor-not-allowed"
+                        : "text-white-100 hover:text-error-100 transition-colors duration-300 ease-out"
+                      }`}
+                    />
                   </button>
                 </div>
               </td>
@@ -119,6 +83,11 @@ function UsersView() {
           ))}
         </tbody>
       </table>
+      <DeleteConfirmationModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 }

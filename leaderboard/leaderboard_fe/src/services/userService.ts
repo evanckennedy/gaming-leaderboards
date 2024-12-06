@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "@/types/types";
 
 interface SignUpData {
   firstName: string;
@@ -20,4 +21,13 @@ export const signUpUser = async (userData: SignUpData) => {
 
 export const signInUser = async (userData: SignInData) => {
   return axios.post(`${apiBaseUrl}/api/users/signin`, userData);
+};
+
+export async function fetchUsers() {
+  const response = await axios.get<User[]>(`${apiBaseUrl}/api/users`);
+  return response.data;
+}
+
+export const deleteUser = async (userId: number) => {
+  return axios.delete(`${apiBaseUrl}/api/users/${userId}`);
 };
