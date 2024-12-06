@@ -54,6 +54,13 @@ This command will automatically install dependencies in:
 
 **Note:** The **pgAdmin** service is configured to persist its data using a Docker volume, so you only need to register the PostgreSQL server once. The server registration and other pgAdmin settings will persist between restarts of the Docker containers.
 
+## Root User Login Credentials
+
+The root user for the leaderboard project has the following credentials:
+
+- **Email**: `root@root.com`
+- **Password**: `rootpassword`
+
 ## Responsiveness Guide
 
 This application is fully responsive and optimized for the following screen sizes:
