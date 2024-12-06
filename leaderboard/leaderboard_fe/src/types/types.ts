@@ -11,7 +11,7 @@ export interface LeaderboardFormValues {
 }
 
 export interface DecodedToken {
-  userId: string;
+  userId: number;
   roleName: string;
   exp: number; // Expiry timestamp
   iat: number; // Issued at timestamp

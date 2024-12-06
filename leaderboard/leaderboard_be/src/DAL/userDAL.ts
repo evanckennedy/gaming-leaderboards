@@ -23,3 +23,13 @@ export async function deleteUserDAL(userId: number) {
     where: { id: userId },
   });
 }
+
+/**
+ * Resets a user's password by ID
+ */
+export async function resetPasswordDAL(userId: number, passwordHash: string) {
+  await prisma.user.update({
+    where: { id: userId },
+    data: { passwordHash },
+  });
+}
