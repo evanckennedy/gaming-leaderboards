@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { fetchUsers, deleteUser } from "@/services/userService";
+import { fetchUsers, deleteUser, resetPassword } from "@/services/userService";
 import { User } from "@/types/types";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export const useUsers = () => {
 
   const handleDeleteClick = (userId: number) => {
     setSelectedUserId(userId);
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
   const handleConfirmDelete = async () => {
@@ -33,14 +34,37 @@ export const useUsers = () => {
       } catch (error) {
         console.error("Error deleting user", error);
       } finally {
-        setIsModalOpen(false);
+        setIsDeleteModalOpen(false);
         setSelectedUserId(null);
       }
     }
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedUserId(null);
+  };
+
+  const handleResetClick = (userId: number) => {
+    setSelectedUserId(userId);
+    setIsResetModalOpen(true);
+  };
+
+  const handleConfirmReset = async (newPassword: string) => {
+    if (selectedUserId !== null) {
+      try {
+        await resetPassword(selectedUserId, newPassword);
+      } catch (error) {
+        console.error("Error resetting password", error);
+      } finally {
+        setIsResetModalOpen(false);
+        setSelectedUserId(null);
+      }
+    }
+  };
+
+  const handleCloseResetModal = () => {
+    setIsResetModalOpen(false);
     setSelectedUserId(null);
   };
 
@@ -50,9 +74,13 @@ export const useUsers = () => {
 
   return {
     users,
-    isModalOpen,
+    isDeleteModalOpen,
     handleDeleteClick,
     handleConfirmDelete,
-    handleCloseModal,
+    handleCloseDeleteModal,
+    isResetModalOpen,
+    handleResetClick,
+    handleConfirmReset,
+    handleCloseResetModal,
   };
 };

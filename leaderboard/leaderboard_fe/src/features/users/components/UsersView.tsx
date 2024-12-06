@@ -3,14 +3,19 @@ import IconResetPassword from "@/components/ui/icons/IconResetPassword";
 import IconTrash from "@/components/ui/icons/IconTrash";
 import { useUsers } from "../hooks/useUsers";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import ResetPasswordModal from "./ResetPasswordModal";
 
 function UsersView() {
   const {
     users,
-    isModalOpen,
+    isDeleteModalOpen,
     handleDeleteClick,
     handleConfirmDelete,
-    handleCloseModal,
+    handleCloseDeleteModal,
+    isResetModalOpen,
+    handleResetClick,
+    handleConfirmReset,
+    handleCloseResetModal,
   } = useUsers();
 
   return (
@@ -48,19 +53,20 @@ function UsersView() {
                       className={`w-auto h-5 3xl:h-8 4xl:h-16 fill-current ${
                         user.role.roleName === "Root" ?
                           "text-gray-400 cursor-not-allowed"
-                        : "text-white-100 hover:text-error-100 transition-colors duration-300 ease-out"
+                        : "text-white-100 hover:text-secondary transition-colors duration-300 ease-out"
                       }`}
                     />
                   </button>
                   <button
                     type="button"
                     disabled={user.role.roleName === "Root"}
+                    onClick={() => handleResetClick(user.id)}
                   >
                     <IconResetPassword
                       className={`w-auto h-5 3xl:h-8 4xl:h-16 fill-current ${
                         user.role.roleName === "Root" ?
                           "text-gray-400 cursor-not-allowed"
-                        : "text-white-100 hover:text-error-100 transition-colors duration-300 ease-out"
+                        : "text-white-100 hover:text-secondary transition-colors duration-300 ease-out"
                       }`}
                     />
                   </button>
@@ -83,10 +89,16 @@ function UsersView() {
           ))}
         </tbody>
       </table>
+      {/* Modals */}
       <DeleteConfirmationModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
         onConfirm={handleConfirmDelete}
+      />
+      <ResetPasswordModal
+        isOpen={isResetModalOpen}
+        onClose={handleCloseResetModal}
+        onConfirm={handleConfirmReset}
       />
     </div>
   );

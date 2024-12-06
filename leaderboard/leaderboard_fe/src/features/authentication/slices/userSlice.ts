@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
-  userId: string | null;
+  userId: number | null;
   roleName: string | null;
   isLoggedIn: boolean;
 }
@@ -18,16 +18,14 @@ const userSlice = createSlice({
   reducers: {
     setCredentials(
       state,
-      action: PayloadAction<{ userId: string; roleName: string }>,
+      action: PayloadAction<{ userId: number; roleName: string }>,
     ) {
       state.userId = action.payload.userId;
       state.roleName = action.payload.roleName;
       state.isLoggedIn = true;
     },
-    logout(state) {
-      state.userId = null;
-      state.roleName = null;
-      state.isLoggedIn = false;
+    logout() {
+      return initialState;
     },
   },
 });

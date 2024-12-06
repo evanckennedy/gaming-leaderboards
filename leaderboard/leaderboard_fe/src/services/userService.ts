@@ -31,3 +31,9 @@ export async function fetchUsers() {
 export const deleteUser = async (userId: number) => {
   return axios.delete(`${apiBaseUrl}/api/users/${userId}`);
 };
+
+export const resetPassword = async (userId: number, newPassword: string) => {
+  await axios.patch(`${apiBaseUrl}/api/users/${userId}/reset-password`, {
+    newPassword,
+  });
+};
