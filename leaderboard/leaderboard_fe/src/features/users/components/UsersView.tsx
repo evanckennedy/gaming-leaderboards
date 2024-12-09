@@ -4,6 +4,7 @@ import IconTrash from "@/components/ui/icons/IconTrash";
 import { useUsers } from "../hooks/useUsers";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import ResetPasswordModal from "./ResetPasswordModal";
+import EditRoleModal from "./EditRoleModal";
 
 function UsersView() {
   const {
@@ -16,6 +17,10 @@ function UsersView() {
     handleResetClick,
     handleConfirmReset,
     handleCloseResetModal,
+    isEditRoleModalOpen,
+    handleEditRoleClick,
+    handleConfirmEditRole,
+    handleCloseEditRoleModal,
   } = useUsers();
 
   return (
@@ -48,6 +53,7 @@ function UsersView() {
                   <button
                     type="button"
                     disabled={user.role.roleName === "Root"}
+                    onClick={() => handleEditRoleClick(user.id)}
                   >
                     <IconEdit
                       className={`w-auto h-5 3xl:h-8 4xl:h-16 fill-current ${
@@ -99,6 +105,11 @@ function UsersView() {
         isOpen={isResetModalOpen}
         onClose={handleCloseResetModal}
         onConfirm={handleConfirmReset}
+      />
+      <EditRoleModal
+        isOpen={isEditRoleModalOpen}
+        onClose={handleCloseEditRoleModal}
+        onConfirm={handleConfirmEditRole}
       />
     </div>
   );
