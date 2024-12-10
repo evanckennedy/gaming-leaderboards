@@ -1,46 +1,44 @@
 import { useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
-import { setCredentials, logout } from "../slices/userSlice";
-import { DecodedToken } from "@/types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../slices/userSlice";
 import { setLogoutTimer } from "@/utils/authUtils";
+import { RootState } from "@/store/store";
 
 /**
- * Hook to check if a user is already logged in
+ * Custom hook to initialize user authentication status and set logout timer.
  *
- * Checks to see if there is a token in local storage
- * If there is a token in local storage, then check to see if the token is valid
- * If the token is valid, set the user's credentials in the store
- * Otherwise, remove the token from local storage and remove the user's credentials in the store
+ * This hook does the following:
+ * - Checks if the user is logged in and if the token expiry time is available.
+ * - Calculates the remaining time until the token expires.
+ * - Sets a logout timer based on the remaining time.
+ * - If the token has already expired, it dispatches a logout action.
+ * - If the token expiry time is missing but the user is logged in, it logs out
+ *   the user (for security).
+ *
+ * This ensures that the user's authentication state is consistent with the
+ * token's validity and handles automatic logout when the token expires.
  */
 const useUserInit = () => {
   const dispatch = useDispatch();
+  const { isLoggedIn, tokenExpiry } = useSelector(
+    (state: RootState) => state.user,
+  );
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    if (isLoggedIn && tokenExpiry) {
+      const currentTime = Date.now() / 1000; // Current time in seconds
+      const timeLeft = (tokenExpiry - currentTime) * 1000; // Convert to milliseconds
 
-    if (token) {
-      const decodedToken = jwtDecode<DecodedToken>(token);
-      const currentTime = Date.now() / 1000;
-      console.log("Token expiration: ", decodedToken.exp); // debugging
-      console.log("Current time: ", currentTime); //debugging
-
-      if (decodedToken.exp > currentTime) {
-        // Token is valid
-        dispatch(
-          setCredentials({
-            userId: decodedToken.userId,
-            roleName: decodedToken.roleName,
-          }),
-        );
-        setLogoutTimer(decodedToken.exp, dispatch);
+      if (timeLeft > 0) {
+        setLogoutTimer(timeLeft, dispatch);
       } else {
         // Token has expired
-        localStorage.removeItem("token");
         dispatch(logout());
       }
+    } else if (isLoggedIn && !tokenExpiry) {
+      dispatch(logout());
     }
-  }, []);
+  }, [dispatch, isLoggedIn, tokenExpiry]);
 };
 
 export default useUserInit;

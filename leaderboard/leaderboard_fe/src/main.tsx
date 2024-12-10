@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import { store } from "./store/store";
 import "./assets/styles/index.css";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./store/store";
 
 const container = document.getElementById("root");
 
@@ -13,7 +15,9 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </React.StrictMode>,
   );
