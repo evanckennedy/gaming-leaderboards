@@ -4,15 +4,12 @@ import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types/types";
 import { setCredentials } from "../slices/userSlice";
 import { store } from "@/store/store";
-import { setLogoutTimer } from "@/utils/authUtils";
 import { signUpUser } from "@/services/userService";
 
 export const handleSubmit = async (
   values: SignUpFormValues,
   { setErrors, resetForm }: FormikHelpers<SignUpFormValues>,
 ) => {
-  console.log("form submitting"); // debugging
-
   try {
     // Trim leading and trailing spaces for all inputs except the password
     const trimmedValues = {
@@ -23,8 +20,6 @@ export const handleSubmit = async (
     };
 
     const response = await signUpUser(trimmedValues);
-
-    console.log("Form submitted: ", response.data); // debugging
 
     const { token, user } = response.data;
 
@@ -42,11 +37,9 @@ export const handleSubmit = async (
       setCredentials({
         userId: decodedToken.userId,
         roleName: decodedToken.roleName,
+        tokenExpiry: decodedToken.exp,
       }),
     );
-
-    // Set up the logout timer
-    setLogoutTimer(decodedToken.exp, dispatch);
 
     resetForm();
   } catch (error) {
