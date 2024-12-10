@@ -57,3 +57,8 @@ export interface User {
     roleName: string;
   };
 }
+
+export interface Role {
+  id: number;
+  roleName: string;
+}

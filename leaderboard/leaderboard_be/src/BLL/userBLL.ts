@@ -1,4 +1,9 @@
-import { deleteUserDAL, getUsersDAL, resetPasswordDAL } from "../DAL/userDAL";
+import {
+  deleteUserDAL,
+  getUsersDAL,
+  resetPasswordDAL,
+  updateUserRoleDAL,
+} from "../DAL/userDAL";
 import bcrypt from "bcrypt";
 
 /**
@@ -24,4 +29,11 @@ export async function resetPasswordBLL(userId: number, newPassword: string) {
   const passwordHash = await bcrypt.hash(newPassword, saltRounds);
 
   await resetPasswordDAL(userId, passwordHash);
+}
+
+/**
+ * Handles the business logic for updating role
+ */
+export async function updateUserRoleBLL(userId: number, newRoleId: number) {
+  await updateUserRoleDAL(userId, newRoleId);
 }

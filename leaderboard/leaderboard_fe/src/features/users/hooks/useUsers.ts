@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
-import { fetchUsers, deleteUser, resetPassword } from "@/services/userService";
+import {
+  fetchUsers,
+  deleteUser,
+  resetPassword,
+  editRole,
+} from "@/services/userService";
 import { User } from "@/types/types";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [isEditRoleModalOpen, setIsEditRoleModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -68,9 +74,34 @@ export const useUsers = () => {
     setSelectedUserId(null);
   };
 
-  useEffect(() => {
-    console.log(users);
-  }, [users]); //debugging
+  const handleEditRoleClick = (userId: number) => {
+    setSelectedUserId(userId);
+    setIsEditRoleModalOpen(true);
+  };
+
+  const handleConfirmEditRole = async (roleId: number, roleName: string) => {
+    if (selectedUserId !== null) {
+      try {
+        await editRole(selectedUserId, roleId);
+        const updatedUsers = users.map((user) =>
+          user.id === selectedUserId ?
+            { ...user, roleId, role: { roleName } }
+          : user,
+        );
+        setUsers(updatedUsers);
+      } catch (error) {
+        console.error("Error editing role", error);
+      } finally {
+        setIsEditRoleModalOpen(false);
+        setSelectedUserId(null);
+      }
+    }
+  };
+
+  const handleCloseEditRoleModal = () => {
+    setSelectedUserId(null);
+    setIsEditRoleModalOpen(false);
+  };
 
   return {
     users,
@@ -82,5 +113,9 @@ export const useUsers = () => {
     handleResetClick,
     handleConfirmReset,
     handleCloseResetModal,
+    isEditRoleModalOpen,
+    handleEditRoleClick,
+    handleConfirmEditRole,
+    handleCloseEditRoleModal,
   };
 };

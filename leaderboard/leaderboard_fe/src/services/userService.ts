@@ -33,7 +33,13 @@ export const deleteUser = async (userId: number) => {
 };
 
 export const resetPassword = async (userId: number, newPassword: string) => {
-  await axios.patch(`${apiBaseUrl}/api/users/${userId}/reset-password`, {
+  await axios.patch(`${apiBaseUrl}/api/users/${userId}/password`, {
     newPassword,
+  });
+};
+
+export const editRole = async (userId: number, newRoleId: number) => {
+  await axios.patch(`${apiBaseUrl}/api/users/${userId}/role`, {
+    newRoleId,
   });
 };
