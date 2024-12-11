@@ -5,6 +5,8 @@ import Leaderboards from "./pages/Leaderboards";
 import CreateNew from "./pages/CreateNew";
 import Users from "./pages/Users";
 import SignIn from "./pages/SignIn";
+import NotAuthorized from "./pages/notAuthorized";
+import ProtectedRoute from "./components/protectedRoutes/ProtectedRoute";
 import useUserInit from "./features/authentication/hooks/useUserInit";
 
 const App = () => {
@@ -20,9 +22,23 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Leaderboards />} />
               <Route path="/leaderboards" element={<Leaderboards />} />
-              <Route path="/create-new" element={<CreateNew />} />
-              <Route path="/users" element={<Users />} />
+              <Route
+                path="/create-new"
+                element={
+                  <ProtectedRoute
+                    allowedRoles={["Root", "Create"]}
+                    element={<CreateNew />}
+                  />
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <ProtectedRoute allowedRoles={["Root"]} element={<Users />} />
+                }
+              />
               <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/not-authorized" element={<NotAuthorized />} />
             </Routes>
           </div>
         </main>
