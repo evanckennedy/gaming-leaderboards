@@ -18,11 +18,13 @@ function UserStatus() {
 
   return (
     <div className="flex flex-col">
-      <p className="text-white-100 text-xl 3xl:text-3xl 4xl:text-6xl">
-        <span>Signed in as: </span>
-        <span>{firstName} </span>
-        <span>{lastName}</span>
-      </p>
+      <div className="flex text-white-100 text-xl 3xl:text-3xl 4xl:text-6xl">
+        <span>Signed in as:</span>
+        <div>
+          <span>{firstName} </span>
+          <span>{lastName}</span>
+        </div>
+      </div>
       <button
         onClick={handleLogout}
         className="text-white-100 text-xl 3xl:text-3xl 4xl:text-6xl hover:text-secondary transition-colors duration-300 ease-out"
