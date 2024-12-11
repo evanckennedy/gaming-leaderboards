@@ -1,8 +1,5 @@
 /**
  * Formats a given Date object into a string in the format MM/DD/YYYY.
- *
- * @param date - The date to format
- * @returns The formatted date string
  */
 
 export function formatDate(date: Date): string {
