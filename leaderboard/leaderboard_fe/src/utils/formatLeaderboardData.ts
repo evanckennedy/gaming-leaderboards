@@ -7,9 +7,6 @@ import { formatDate } from "./formatDate";
  * Takes raw leaderboard data and formats it to include the game name,
  * formatted game date, and player details (full name, placement, and score).
  * This is all the relevant data for the UI display of leaderboards
- *
- * @param leaderboards - The leaderboard data that is returned from fetching leaderboards
- * @returns The formatted leaderboard data.
  */
 export function formatLeaderboardData(leaderboards: Leaderboard[]) {
   return leaderboards.map((leaderboard) => ({
