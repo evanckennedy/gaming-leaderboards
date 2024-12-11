@@ -1,8 +1,6 @@
 import { FormikHelpers } from "formik";
 import { LeaderboardFormValues } from "@/types/types";
-import axios from "axios";
-
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
+import { createLeaderboard } from "@/services/leaderboardService";
 
 // In createLeaderboardHandler.ts
 export const handleSubmit = async (
@@ -24,13 +22,8 @@ export const handleSubmit = async (
       players: playersWithNumbers,
     };
 
-    // Send POST request to the API
-    const response = await axios.post(
-      `${apiBaseUrl}/api/leaderboards`,
-      submissionValues,
-    );
-
-    console.log("Response data: ", response.data); // debugging
+    // Use the service function to send the POST request
+    await createLeaderboard(submissionValues);
 
     // Reset the form to its initial values
     resetForm();
