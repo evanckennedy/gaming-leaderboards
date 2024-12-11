@@ -1,5 +1,6 @@
 import axios from "axios";
 import { User } from "@/types/types";
+import apiClient from "./apiClient";
 
 interface SignUpData {
   firstName: string;
@@ -24,22 +25,22 @@ export const signInUser = async (userData: SignInData) => {
 };
 
 export async function fetchUsers() {
-  const response = await axios.get<User[]>(`${apiBaseUrl}/api/users`);
+  const response = await apiClient.get<User[]>(`/api/users`);
   return response.data;
 }
 
 export const deleteUser = async (userId: number) => {
-  return axios.delete(`${apiBaseUrl}/api/users/${userId}`);
+  return apiClient.delete(`/api/users/${userId}`);
 };
 
 export const resetPassword = async (userId: number, newPassword: string) => {
-  await axios.patch(`${apiBaseUrl}/api/users/${userId}/password`, {
+  await apiClient.patch(`/api/users/${userId}/password`, {
     newPassword,
   });
 };
 
 export const editRole = async (userId: number, newRoleId: number) => {
-  await axios.patch(`${apiBaseUrl}/api/users/${userId}/role`, {
+  await apiClient.patch(`/api/users/${userId}/role`, {
     newRoleId,
   });
 };
