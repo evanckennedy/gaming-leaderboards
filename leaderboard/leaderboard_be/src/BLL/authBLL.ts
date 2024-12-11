@@ -24,6 +24,8 @@ export async function signUpBLL(data: SignUpFormValues) {
     {
       userId: user.id,
       roleName: user.role.roleName,
+      firstName: user.firstName,
+      lastName: user.lastName,
     },
     process.env.JWT_SECRET as string,
     { expiresIn: "1h" },
@@ -62,6 +64,8 @@ export async function signInBLL(data: SignInFormValues) {
     {
       userId: user.id,
       roleName: user.role.roleName,
+      firstName: user.firstName,
+      lastName: user.lastName,
     },
     process.env.JWT_SECRET as string,
     { expiresIn: "1h" },
