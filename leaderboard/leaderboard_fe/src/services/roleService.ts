@@ -1,9 +1,7 @@
-import axios from "axios";
 import { Role } from "@/types/types";
-
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
+import apiClient from "./apiClient";
 
 export const fetchRoles = async () => {
-  const response = await axios.get<Role[]>(`${apiBaseUrl}/api/roles`);
+  const response = await apiClient.get<Role[]>(`/api/roles`);
   return response.data;
 };
