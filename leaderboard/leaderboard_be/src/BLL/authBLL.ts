@@ -31,7 +31,7 @@ export async function signUpBLL(data: SignUpFormValues) {
     { expiresIn: "1h" },
   );
 
-  return { user, token };
+  return { token };
 }
 
 /**
@@ -71,5 +71,5 @@ export async function signInBLL(data: SignInFormValues) {
     { expiresIn: "1h" },
   );
 
-  return { user, token };
+  return { token };
 }
