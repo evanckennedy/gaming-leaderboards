@@ -21,7 +21,7 @@ export const handleSubmit = async (
 
     const response = await signUpUser(trimmedValues);
 
-    const { token, user } = response.data;
+    const { token } = response.data;
 
     // Store the token in local storage
     localStorage.setItem("token", token);
@@ -37,6 +37,8 @@ export const handleSubmit = async (
       setCredentials({
         userId: decodedToken.userId,
         roleName: decodedToken.roleName,
+        firstName: decodedToken.firstName,
+        lastName: decodedToken.lastName,
         tokenExpiry: decodedToken.exp,
       }),
     );
