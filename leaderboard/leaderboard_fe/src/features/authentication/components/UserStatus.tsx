@@ -17,20 +17,22 @@ function UserStatus() {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="flex text-white-100 text-xl 3xl:text-3xl 4xl:text-6xl">
-        <span>Signed in as:</span>
-        <div>
+    <div className="flex flex-col justify-center gap-1 3xl:gap-1.5 4xl:gap-5">
+      <div className="flex justify-end text-white-100 3xl:text-2xl 4xl:text-5xl font-black">
+        <span className="mr-1 3xl:mr-1.5 4xl:mr-3">Signed in as:</span>
+        <div className="hover:text-secondary transition-colors duration-300 ease-out cursor-pointer">
           <span>{firstName} </span>
           <span>{lastName}</span>
         </div>
       </div>
-      <button
-        onClick={handleLogout}
-        className="text-white-100 text-xl 3xl:text-3xl 4xl:text-6xl hover:text-secondary transition-colors duration-300 ease-out"
-      >
-        Sign Out &gt;&gt;
-      </button>
+      <div className="flex justify-end">
+        <button
+          onClick={handleLogout}
+          className="uppercase text-white-100 3xl:text-2xl 4xl:text-5xl font-black hover:text-secondary transition-colors duration-300 ease-out"
+        >
+          Sign Out &gt;&gt;
+        </button>
+      </div>
     </div>
   );
 }
