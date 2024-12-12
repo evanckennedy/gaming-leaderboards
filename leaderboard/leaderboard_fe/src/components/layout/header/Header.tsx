@@ -15,7 +15,7 @@ function Header() {
           />
         </Link>
       </figure>
-      <div className="flex">
+      <div className="flex gap-6 3xl:gap-9 4xl:gap-16">
         <UserStatus />
         <figure>
           <img
