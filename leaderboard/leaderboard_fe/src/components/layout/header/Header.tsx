@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import BSDGamingLogo from "@/assets/images/leaderboard/Logo_BSDXRGamingLeaderboards.png";
 import BSDGamingLogoNoText from "@/assets/images/leaderboard/Logo_BSDXRGamingLeaderboards_NoText.png";
+import UserStatus from "@/features/authentication/components/UserStatus";
 
 function Header() {
   return (
@@ -14,13 +15,16 @@ function Header() {
           />
         </Link>
       </figure>
-      <figure>
-        <img
-          src={BSDGamingLogoNoText}
-          alt="BSD gaming logo, no text"
-          className="h-16 3xl:h-24 4xl:h-48"
-        />
-      </figure>
+      <div className="flex gap-6 3xl:gap-9 4xl:gap-16">
+        <UserStatus />
+        <figure>
+          <img
+            src={BSDGamingLogoNoText}
+            alt="BSD gaming logo, no text"
+            className="h-16 3xl:h-24 4xl:h-48"
+          />
+        </figure>
+      </div>
     </header>
   );
 }

@@ -4,6 +4,8 @@ import { clearLogoutTimer } from "@/utils/authUtils";
 interface UserState {
   userId: number | null;
   roleName: string | null;
+  firstName: string | null;
+  lastName: string | null;
   isLoggedIn: boolean;
   tokenExpiry: number | null;
 }
@@ -11,6 +13,8 @@ interface UserState {
 const initialState: UserState = {
   userId: null,
   roleName: null,
+  firstName: null,
+  lastName: null,
   isLoggedIn: false,
   tokenExpiry: null,
 };
@@ -24,11 +28,15 @@ const userSlice = createSlice({
       action: PayloadAction<{
         userId: number;
         roleName: string;
+        firstName: string;
+        lastName: string;
         tokenExpiry: number;
       }>,
     ) {
       state.userId = action.payload.userId;
       state.roleName = action.payload.roleName;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
       state.isLoggedIn = true;
       state.tokenExpiry = action.payload.tokenExpiry;
     },
