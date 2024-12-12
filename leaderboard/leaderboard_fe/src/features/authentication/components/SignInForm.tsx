@@ -1,7 +1,6 @@
 import { Formik, Form, Field } from "formik";
 import { validationSchema } from "../schemas/signInSchema";
 import { handleSubmit } from "../handlers/signInHandler";
-import { useState } from "react";
 
 export interface SignInFormValues {
   email: string;
@@ -13,12 +12,6 @@ interface SignInFormProps {
 }
 
 const SignInForm = ({ onToggleResetPassword }: SignInFormProps) => {
-  const [showResetPassword, setShowResetPassword] = useState(false);
-
-  const toggleResetPassword = () => {
-    setShowResetPassword(!showResetPassword);
-  };
-
   return (
     <div className="w-full flex justify-center mt-16 3xl:mt-24 4xl:mt-48">
       <Formik
