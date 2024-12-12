@@ -1,13 +1,24 @@
 import { Formik, Form, Field } from "formik";
 import { validationSchema } from "../schemas/signInSchema";
 import { handleSubmit } from "../handlers/signInHandler";
+import { useState } from "react";
 
 export interface SignInFormValues {
   email: string;
   password: string;
 }
 
-const SignInForm = () => {
+interface SignInFormProps {
+  onToggleResetPassword: () => void;
+}
+
+const SignInForm = ({ onToggleResetPassword }: SignInFormProps) => {
+  const [showResetPassword, setShowResetPassword] = useState(false);
+
+  const toggleResetPassword = () => {
+    setShowResetPassword(!showResetPassword);
+  };
+
   return (
     <div className="w-full flex justify-center mt-16 3xl:mt-24 4xl:mt-48">
       <Formik
@@ -46,6 +57,7 @@ const SignInForm = () => {
                 </label>
                 <button
                   type="button"
+                  onClick={onToggleResetPassword}
                   className="absolute right-0 bottom-0 text-sm 3xl:text-xl 4xl:text-4xl text-white-100 font-medium hover:text-secondary transition-colors duration-300 ease-out cursor-pointer"
                 >
                   Reset Password
