@@ -4,21 +4,17 @@ import SignUpForm from "@/features/authentication/components/SignUpForm";
 import ResetPasswordForm from "@/features/authentication/components/ResetPasswordForm";
 import ToggleAuthenticationForm from "@/features/authentication/components/ToggleAuthenticationForm";
 import useAuthenticationState from "./hooks/useAuthenticationState";
+import useResetPasswordState from "./hooks/useResetPasswordState";
 import { useEffect } from "react";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 function SignIn() {
   const { isSignUp, toggleForm } = useAuthenticationState();
+  const { showResetPassword, toggleResetPassword } = useResetPasswordState();
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
-  const [showResetPassword, setShowResetPassword] = useState(false);
-
-  const toggleResetPassword = () => {
-    setShowResetPassword(!showResetPassword);
-  };
 
   let title = "Sign In";
   if (isSignUp) {
