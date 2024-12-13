@@ -1,6 +1,6 @@
 import { SignInFormValues, SignUpFormValues } from "../types/types";
 import bcrypt from "bcrypt";
-import { signInDAL, signUpDAL } from "../DAL/authDAL";
+import { signInDAL, signUpDAL, resetPasswordDAL } from "../DAL/authDAL";
 import jwt from "jsonwebtoken";
 
 /**
