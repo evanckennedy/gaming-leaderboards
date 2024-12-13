@@ -1,11 +1,12 @@
 import { FormikHelpers } from "formik";
 import { LeaderboardFormValues } from "@/types/types";
 import { createLeaderboard } from "@/services/leaderboardService";
+import axios from "axios";
 
 // In createLeaderboardHandler.ts
 export const handleSubmit = async (
   values: LeaderboardFormValues,
-  { setSubmitting, setErrors, resetForm }: FormikHelpers<LeaderboardFormValues>,
+  formikHelpers: FormikHelpers<LeaderboardFormValues>,
 ) => {
   try {
     // Convert score and place to numbers
@@ -25,12 +26,17 @@ export const handleSubmit = async (
     // Use the service function to send the POST request
     await createLeaderboard(submissionValues);
 
-    // Reset the form to its initial values
-    resetForm();
+    // Clear any previous form status
+    formikHelpers.setStatus(undefined);
+    formikHelpers.resetForm();
   } catch (error) {
-    // Handle error response
-    setErrors({ title: "An error occurred. Please try again." });
-  } finally {
-    setSubmitting(false);
+    // Extract error message from the server response
+    let errorMessage = "An error occurred. Please try again.";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.error || errorMessage;
+    }
+
+    // Set the error message in Formik's status
+    formikHelpers.setStatus(errorMessage);
   }
 };
