@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { SignInFormValues, SignUpFormValues } from "../types/types";
-import { signUpBLL, signInBLL, resetPasswordBLL } from "../BLL/authBLL";
+import { signUpBLL, signInBLL } from "../BLL/authBLL";
 
 /**
  * Handles user sign-up.
@@ -47,13 +47,14 @@ export async function signIn(req: Request, res: Response) {
   }
 }
 
+// Could be used in the future if you make it more secure
 /**
  * Handles user password reset.
  *
  * Expects `email` and `newPassword` in the request body.
  * Returns a success message or an error.
  */
-export async function resetPassword(req: Request, res: Response) {
+/* export async function resetPassword(req: Request, res: Response) {
   try {
     const { email, newPassword } = req.body;
 
@@ -64,4 +65,4 @@ export async function resetPassword(req: Request, res: Response) {
     console.error("Error resetting password", (error as Error).message);
     res.status(500).json({ error: (error as Error).message });
   }
-}
+} */
