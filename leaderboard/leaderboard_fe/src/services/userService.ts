@@ -29,6 +29,8 @@ export const signInUser = async (userData: SignInData) => {
   return axios.post(`${apiBaseUrl}/api/users/signin`, userData);
 };
 
+// This could be used in the future if you make it more secure
+// The API is commented out in backend
 export const resetMyPassword = async (userData: ResetMyPasswordData) => {
   await axios.patch(`${apiBaseUrl}/api/users/password`, userData);
 };
