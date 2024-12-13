@@ -1,5 +1,6 @@
 import { FormikHelpers } from "formik";
 import { ResetPasswordFormValues } from "../components/ResetPasswordForm";
+import { resetMyPassword } from "@/services/userService";
 
 export const handleSubmit = async (
   values: ResetPasswordFormValues,
@@ -8,18 +9,15 @@ export const handleSubmit = async (
   try {
     const trimmedValues = {
       email: values.email.trim(),
-      password: values.password,
+      newPassword: values.password,
     };
 
-    // simulate api call
-    setTimeout(() => {
-      console.log("Form submited:", trimmedValues);
-    }, 1000);
+    await resetMyPassword(trimmedValues);
 
     resetForm();
     // Maybe redirect the user back to the sign in view upon successful password reset
   } catch (error) {
-    // server error. change later
+    // display this if there's a server error. change later for better UI
     setErrors({ email: "An error occurred. Please try again." });
   }
 };
