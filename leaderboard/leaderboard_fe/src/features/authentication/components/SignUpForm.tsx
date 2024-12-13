@@ -1,6 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import { validationSchema } from "../schemas/signUpSchema";
 import { handleSubmit } from "../handlers/signUpHandler";
+import FormErrorMessage from "@/features/formErrors/components/FormErrorMessage";
 
 export interface SignUpFormValues {
   firstName: string;
@@ -17,7 +18,7 @@ function SignUpForm() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, touched, errors }) => (
+        {({ isSubmitting, touched, errors, status }) => (
           <Form className="w-1/2">
             <div className="flex justify-between gap-8 3xl:gap-12 4xl:gap-24">
               <div className="w-full flex flex-col mb-4 3xl:mb-6 4xl:mb-12">
@@ -104,7 +105,7 @@ function SignUpForm() {
                 {touched.password && errors.password ? errors.password : ""}
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="relative flex justify-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -114,6 +115,7 @@ function SignUpForm() {
               >
                 Sign Up
               </button>
+              {status && <FormErrorMessage message={status} />}
             </div>
           </Form>
         )}
