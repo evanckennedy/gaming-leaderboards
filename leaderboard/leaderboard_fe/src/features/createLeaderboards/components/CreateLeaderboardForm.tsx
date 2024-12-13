@@ -4,6 +4,7 @@ import { handleSubmit } from "../handlers/createLeaderboardHandler";
 import CreateLeaderboardPreview from "./CreateLeaderboardPreview";
 import PlayerFields from "./PlayerFields";
 import GameGenreFields from "./GameGenreFields";
+import FormErrorMessage from "@/features/formErrors/components/FormErrorMessage";
 
 function CreateLeaderboardForm() {
   return (
@@ -17,7 +18,7 @@ function CreateLeaderboardForm() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, touched, values }) => (
+        {({ isSubmitting, touched, values, status }) => (
           <div className="flex justify-between h-full">
             <Form className="w-7/12">
               <GameGenreFields />
@@ -25,7 +26,7 @@ function CreateLeaderboardForm() {
               <PlayerFields />
 
               {/* Submit Button */}
-              <div className="flex justify-end mt-3 3xl:mt-5 4xl:mt-9">
+              <div className="relative flex justify-end mt-3 3xl:mt-5 4xl:mt-9">
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -33,6 +34,7 @@ function CreateLeaderboardForm() {
                 >
                   Submit Leaderboard
                 </button>
+                {status && <FormErrorMessage message={status} />}
               </div>
             </Form>
             <CreateLeaderboardPreview values={values} touched={touched} />
