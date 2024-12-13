@@ -56,10 +56,11 @@ export async function signInDAL(email: string) {
   }
 }
 
+// Could be used in the future if you make it more secure
 /**
  * Updates the user's password hash in the database using the email.
  */
-export async function resetPasswordDAL(email: string, newPasswordHash: string) {
+/* export async function resetPasswordDAL(email: string, newPasswordHash: string) {
   try {
     await prisma.user.update({
       where: { email },
@@ -70,4 +71,4 @@ export async function resetPasswordDAL(email: string, newPasswordHash: string) {
   } catch (error) {
     throw error;
   }
-}
+} */
