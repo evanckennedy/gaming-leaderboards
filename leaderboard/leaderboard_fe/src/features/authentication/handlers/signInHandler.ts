@@ -5,20 +5,19 @@ import { DecodedToken } from "@/types/types";
 import { setCredentials } from "../slices/userSlice";
 import { store } from "@/store/store";
 import { signInUser } from "@/services/userService";
+import axios from "axios";
 
 export const handleSubmit = async (
   values: SignInFormValues,
-  { setErrors, resetForm }: FormikHelpers<SignInFormValues>,
+  formikHelpers: FormikHelpers<SignInFormValues>,
 ) => {
   try {
-    // Trim the email before submitting
     const trimmedValues = {
       email: values.email.trim(),
       password: values.password,
     };
 
     const response = await signInUser(trimmedValues);
-
     const { token } = response.data;
 
     // Store the token in local storage
@@ -27,10 +26,7 @@ export const handleSubmit = async (
     // Decode the token
     const decodedToken = jwtDecode<DecodedToken>(token);
 
-    console.log(decodedToken); // debugging
-
     const dispatch = store.dispatch;
-
     dispatch(
       setCredentials({
         userId: decodedToken.userId,
@@ -41,10 +37,17 @@ export const handleSubmit = async (
       }),
     );
 
-    resetForm();
+    // Clear any previous form status
+    formikHelpers.setStatus(undefined);
+    formikHelpers.resetForm();
   } catch (error) {
-    // Handle error response
-    setErrors({ email: "An error occurred. Please try again." });
-    // Formik will automatically set isSubmitting to false
+    // Extract error message from the server response
+    let errorMessage = "An error occurred. Please try again.";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.error || errorMessage;
+    }
+
+    // Set the error message in Formik's status
+    formikHelpers.setStatus(errorMessage);
   }
 };
