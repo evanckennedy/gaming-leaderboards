@@ -17,7 +17,9 @@ function ResetPasswordForm({ onBack }: ResetPasswordFormProps) {
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={(values, formikHelpers) =>
+          handleSubmit(values, formikHelpers, onBack)
+        }
       >
         {({ isSubmitting, touched, errors }) => (
           <Form className="w-1/2">
