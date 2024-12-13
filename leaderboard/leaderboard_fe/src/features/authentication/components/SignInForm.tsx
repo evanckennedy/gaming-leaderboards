@@ -8,11 +8,7 @@ export interface SignInFormValues {
   password: string;
 }
 
-interface SignInFormProps {
-  onToggleResetPassword: () => void;
-}
-
-const SignInForm = ({ onToggleResetPassword }: SignInFormProps) => {
+const SignInForm = () => {
   return (
     <div className="w-full flex justify-center mt-16 3xl:mt-24 4xl:mt-48">
       <Formik
