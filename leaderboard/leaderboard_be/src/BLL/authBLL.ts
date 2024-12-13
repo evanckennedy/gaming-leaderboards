@@ -1,6 +1,6 @@
 import { SignInFormValues, SignUpFormValues } from "../types/types";
 import bcrypt from "bcrypt";
-import { signInDAL, signUpDAL, resetPasswordDAL } from "../DAL/authDAL";
+import { signInDAL, signUpDAL } from "../DAL/authDAL";
 import jwt from "jsonwebtoken";
 
 /**
@@ -74,12 +74,13 @@ export async function signInBLL(data: SignInFormValues) {
   return { token };
 }
 
+// Could be used in the future if you make it more secure
 /**
  * Handles the business logic for resetting a user's password.
  *
  * Finds the user by email, hashes the new password, and updates it in the database.
  */
-export async function resetPasswordBLL(email: string, newPassword: string) {
+/* export async function resetPasswordBLL(email: string, newPassword: string) {
   // Get the user by email
   const user = await signInDAL(email);
 
@@ -95,3 +96,4 @@ export async function resetPasswordBLL(email: string, newPassword: string) {
   // Update the user's password in the database using the email
   await resetPasswordDAL(email, newPasswordHash);
 }
+ */
