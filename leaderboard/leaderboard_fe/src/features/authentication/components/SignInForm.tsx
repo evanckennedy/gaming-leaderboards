@@ -7,11 +7,7 @@ export interface SignInFormValues {
   password: string;
 }
 
-interface SignInFormProps {
-  onToggleResetPassword: () => void;
-}
-
-const SignInForm = ({ onToggleResetPassword }: SignInFormProps) => {
+const SignInForm = () => {
   return (
     <div className="w-full flex justify-center mt-16 3xl:mt-24 4xl:mt-48">
       <Formik
@@ -41,21 +37,12 @@ const SignInForm = ({ onToggleResetPassword }: SignInFormProps) => {
               </p>
             </div>
             <div className="flex flex-col mb-4 3xl:mb-6 4xl:mb-12">
-              <div className="relative flex justify-center mb-4 3xl:mb-6 4xl:mb-12">
-                <label
-                  htmlFor="password"
-                  className="text-center text-xl 3xl:text-3xl 4xl:text-6xl uppercase font-black text-white-100"
-                >
-                  Password
-                </label>
-                <button
-                  type="button"
-                  onClick={onToggleResetPassword}
-                  className="absolute right-0 bottom-0 text-sm 3xl:text-xl 4xl:text-4xl text-white-100 font-medium hover:text-secondary transition-colors duration-300 ease-out cursor-pointer"
-                >
-                  Reset Password
-                </button>
-              </div>
+              <label
+                htmlFor="password"
+                className="mb-4 3xl:mb-6 4xl:mb-12 text-center text-xl 3xl:text-3xl 4xl:text-6xl uppercase font-black text-white-100"
+              >
+                Password
+              </label>
               <Field
                 type="password"
                 name="password"
