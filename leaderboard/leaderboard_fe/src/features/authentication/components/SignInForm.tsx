@@ -1,6 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import { validationSchema } from "../schemas/signInSchema";
 import { handleSubmit } from "../handlers/signInHandler";
+import FormErrorMessage from "@/features/formErrors/components/FormErrorMessage";
 
 export interface SignInFormValues {
   email: string;
@@ -15,7 +16,7 @@ const SignInForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, touched, errors }) => (
+        {({ isSubmitting, touched, errors, status }) => (
           <Form className="w-1/2">
             <div className="flex flex-col mb-4 3xl:mb-6 4xl:mb-12">
               <label
@@ -55,7 +56,7 @@ const SignInForm = () => {
                 {touched.password && errors.password ? errors.password : ""}
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="relative flex justify-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -65,6 +66,7 @@ const SignInForm = () => {
               >
                 Sign In
               </button>
+              {status && <FormErrorMessage message={status} />}
             </div>
           </Form>
         )}
