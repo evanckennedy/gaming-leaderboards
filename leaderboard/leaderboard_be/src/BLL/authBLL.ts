@@ -73,27 +73,3 @@ export async function signInBLL(data: SignInFormValues) {
 
   return { token };
 }
-
-// Could be used in the future if you make it more secure
-/**
- * Handles the business logic for resetting a user's password.
- *
- * Finds the user by email, hashes the new password, and updates it in the database.
- */
-/* export async function resetPasswordBLL(email: string, newPassword: string) {
-  // Get the user by email
-  const user = await signInDAL(email);
-
-  // Check if the user exists
-  if (!user) {
-    throw new Error("User not found");
-  }
-
-  // Hash the new password
-  const saltRounds = 10;
-  const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
-
-  // Update the user's password in the database using the email
-  await resetPasswordDAL(email, newPasswordHash);
-}
- */
