@@ -14,11 +14,6 @@ interface SignInData {
   password: string;
 }
 
-interface ResetMyPasswordData {
-  email: string;
-  newPassword: string;
-}
-
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8234";
 
 export const signUpUser = async (userData: SignUpData) => {
@@ -27,12 +22,6 @@ export const signUpUser = async (userData: SignUpData) => {
 
 export const signInUser = async (userData: SignInData) => {
   return axios.post(`${apiBaseUrl}/api/users/signin`, userData);
-};
-
-// This could be used in the future if you make it more secure
-// The API is commented out in backend
-export const resetMyPassword = async (userData: ResetMyPasswordData) => {
-  await axios.patch(`${apiBaseUrl}/api/users/password`, userData);
 };
 
 export async function fetchUsers() {
