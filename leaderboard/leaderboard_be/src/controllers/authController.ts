@@ -46,23 +46,3 @@ export async function signIn(req: Request, res: Response) {
     res.status(401).json({ error: (error as Error).message });
   }
 }
-
-// Could be used in the future if you make it more secure
-/**
- * Handles user password reset.
- *
- * Expects `email` and `newPassword` in the request body.
- * Returns a success message or an error.
- */
-/* export async function resetPassword(req: Request, res: Response) {
-  try {
-    const { email, newPassword } = req.body;
-
-    await resetPasswordBLL(email, newPassword);
-
-    res.status(200).json({ message: "Password reset successful" });
-  } catch (error) {
-    console.error("Error resetting password", (error as Error).message);
-    res.status(500).json({ error: (error as Error).message });
-  }
-} */
