@@ -1,6 +1,7 @@
 interface FormattedLeaderboardData {
   gameName: string;
-  gameDate: string;
+  rawGameDate: Date;
+  displayGameDate: string;
   players: {
     fullName: string;
     placement: number;
@@ -10,8 +11,6 @@ interface FormattedLeaderboardData {
 
 export function sortByLatest(leaderboards: FormattedLeaderboardData[]) {
   return leaderboards.sort((a, b) => {
-    const dateA = new Date(a.gameDate);
-    const dateB = new Date(b.gameDate);
-    return dateB.getTime() - dateA.getTime();
+    return b.rawGameDate.getTime() - a.rawGameDate.getTime();
   });
 }

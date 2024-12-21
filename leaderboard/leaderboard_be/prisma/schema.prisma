@@ -44,7 +44,7 @@ model GameGenre {
 model Session {
   id             Int             @id @default(autoincrement())
   gameId         Int             @map("game_id")
-  gameDate       DateTime        @default(now()) @map("game_date") @db.Date
+  gameDate       DateTime        @default(now()) @map("game_date")
   game           Game            @relation(fields: [gameId], references: [id])
   sessionPlayers SessionPlayer[]
 

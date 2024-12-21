@@ -9,13 +9,21 @@ import { formatDate } from "./formatDate";
  * This is all the relevant data for the UI display of leaderboards
  */
 export function formatLeaderboardData(leaderboards: Leaderboard[]) {
-  return leaderboards.map((leaderboard) => ({
-    gameName: leaderboard.game.name,
-    gameDate: formatDate(new Date(leaderboard.gameDate)),
-    players: leaderboard.sessionPlayers.map((sessionPlayer) => ({
-      fullName: `${sessionPlayer.player.firstName} ${sessionPlayer.player.lastName}`,
-      placement: sessionPlayer.placement,
-      score: sessionPlayer.score,
-    })),
-  }));
+  return leaderboards.map((leaderboard) => {
+    // Convert the raw string to a Date object
+    const rawDate = new Date(leaderboard.gameDate);
+
+    return {
+      gameName: leaderboard.game.name,
+      // Store the raw date for sorting
+      rawGameDate: rawDate,
+      // Use formatDate to produce a display-friendly version
+      displayGameDate: formatDate(rawDate),
+      players: leaderboard.sessionPlayers.map((sessionPlayer) => ({
+        fullName: `${sessionPlayer.player.firstName} ${sessionPlayer.player.lastName}`,
+        placement: sessionPlayer.placement,
+        score: sessionPlayer.score,
+      })),
+    };
+  });
 }
