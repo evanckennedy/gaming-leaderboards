@@ -25,7 +25,7 @@ function LeaderboardsDisplay() {
           <MiniLeaderboard
             key={index}
             title={leaderboard.gameName}
-            sessionDate={leaderboard.gameDate}
+            sessionDate={leaderboard.displayGameDate}
             players={topPlayers}
           />
         );
