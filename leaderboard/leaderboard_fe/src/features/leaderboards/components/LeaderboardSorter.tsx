@@ -1,22 +1,22 @@
-import { ChangeEvent } from "react";
+import { useState } from "react";
+import LeaderboardSortDropdown from "./LeaderboardSortDropdown";
+
 interface LeaderboardSorterProps {
   setSortOption: (option: string) => void;
 }
 
 function LeaderboardSorter({ setSortOption }: LeaderboardSorterProps) {
-  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSortOption(event.target.value);
+  const [value, setValue] = useState("latest");
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+    setSortOption(newValue);
   };
 
   return (
-    <div className="uppercase text-white-100 font-black 3xl:text-2xl 4xl:text-5xl hover:text-secondary transition-colors duration-300 ease-out cursor-pointer">
-      <label htmlFor="leaderboard-sort">Sort By: </label>
-      <select id="leaderboard-sort" onChange={handleSortChange}>
-        <option value="latest">Latest</option>
-        <option value="oldest">Oldest</option>
-        <option value="atoz">A to Z</option>
-        <option value="ztoa">Z to A</option>
-      </select>
+    <div className="flex gap-1 3xl:gap-1.5 4xl:gap-3 uppercase text-white-100 font-black 3xl:text-2xl 4xl:text-5xl">
+      <span>Sort By:</span>
+      <LeaderboardSortDropdown value={value} onChange={handleChange} />
     </div>
   );
 }
