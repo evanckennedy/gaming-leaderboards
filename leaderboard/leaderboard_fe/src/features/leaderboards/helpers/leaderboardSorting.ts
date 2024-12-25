@@ -1,4 +1,4 @@
-interface FormattedLeaderboardData {
+export interface FormattedLeaderboardData {
   gameName: string;
   rawGameDate: Date;
   displayGameDate: string;
