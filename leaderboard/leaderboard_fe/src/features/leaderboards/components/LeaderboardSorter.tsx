@@ -1,10 +1,22 @@
-function LeaderboardSorter() {
-  return (
-    <div className="uppercase text-white-100 font-black 3xl:text-2xl 4xl:text-5xl hover:text-secondary transition-colors duration-300 ease-out cursor-pointer">
-      <label htmlFor="leaderboard-sort">Sort By: </label>
+import { useState } from "react";
+import LeaderboardSortDropdown from "./LeaderboardSortDropdown";
 
-      {/* This span is a placeholder for the sorting options. It will likely be replaced with a dropdown menu in the future. */}
-      <span id="leaderboard-sort">Latest</span>
+interface LeaderboardSorterProps {
+  setSortOption: (option: string) => void;
+}
+
+function LeaderboardSorter({ setSortOption }: LeaderboardSorterProps) {
+  const [value, setValue] = useState("latest");
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+    setSortOption(newValue);
+  };
+
+  return (
+    <div className="flex gap-1 3xl:gap-1.5 4xl:gap-3 uppercase text-white-100 font-black 3xl:text-2xl 4xl:text-5xl">
+      <span>Sort By:</span>
+      <LeaderboardSortDropdown value={value} onChange={handleChange} />
     </div>
   );
 }

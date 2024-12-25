@@ -1,12 +1,14 @@
 import MiniLeaderboard from "./MiniLeaderboard";
-import { useFetchLeaderboards } from "../hooks/useFetchLeaderboards";
+import { FormattedLeaderboardData } from "../helpers/leaderboardSorting";
 
-function LeaderboardsDisplay() {
-  const leaderboards = useFetchLeaderboards();
+interface LeaderboardsDisplayProps {
+  sortedLeaderboards: FormattedLeaderboardData[];
+}
 
+function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
   return (
     <div className="grid grid-cols-3 gap-6 3xl:gap-9 4xl:gap-20">
-      {leaderboards.map((leaderboard, index) => {
+      {sortedLeaderboards.map((leaderboard, index) => {
         const topPlayers = leaderboard.players
           .sort((a, b) => a.placement - b.placement)
           .slice(0, 3); // Take the top 3 players
