@@ -1,40 +1,10 @@
-import { useState, useEffect } from "react";
 import LeaderboardsDisplay from "./LeaderboardsDisplay";
 import LeaderboardSorter from "./LeaderboardSorter";
 import CreateLeaderboardLink from "./CreateLeaderboardLink";
-import { useFetchLeaderboards } from "../hooks/useFetchLeaderboards";
-import {
-  sortByLatest,
-  sortByOldest,
-  sortByAToZ,
-  sortByZToA,
-} from "../helpers/leaderboardSorting";
+import { useSortedLeaderboards } from "../hooks/useSortedLeaderboards";
 
 function LeaderboardsContainer() {
-  const { leaderboards } = useFetchLeaderboards();
-  const [sortedLeaderboards, setSortedLeaderboards] = useState(leaderboards);
-  const [sortOption, setSortOption] = useState("latest");
-
-  useEffect(() => {
-    let sortedData;
-    switch (sortOption) {
-      case "latest":
-        sortedData = sortByLatest([...leaderboards]);
-        break;
-      case "oldest":
-        sortedData = sortByOldest([...leaderboards]);
-        break;
-      case "atoz":
-        sortedData = sortByAToZ([...leaderboards]);
-        break;
-      case "ztoa":
-        sortedData = sortByZToA([...leaderboards]);
-        break;
-      default:
-        sortedData = leaderboards;
-    }
-    setSortedLeaderboards(sortedData);
-  }, [leaderboards, sortOption]);
+  const { sortedLeaderboards, setSortOption } = useSortedLeaderboards();
 
   return (
     <>
