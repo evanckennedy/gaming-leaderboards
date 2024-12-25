@@ -1,10 +1,26 @@
-function LeaderboardSorter() {
+import { ChangeEvent } from "react";
+interface LeaderboardSorterProps {
+  setSortOption: (option: string) => void;
+}
+
+function LeaderboardSorter({ setSortOption }: LeaderboardSorterProps) {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(event.target.value);
+  };
+
   return (
     <div className="uppercase text-white-100 font-black 3xl:text-2xl 4xl:text-5xl hover:text-secondary transition-colors duration-300 ease-out cursor-pointer">
       <label htmlFor="leaderboard-sort">Sort By: </label>
-
-      {/* This span is a placeholder for the sorting options. It will likely be replaced with a dropdown menu in the future. */}
-      <span id="leaderboard-sort">Latest</span>
+      <select
+        id="leaderboard-sort"
+        className="bg-black"
+        onChange={handleSortChange}
+      >
+        <option value="latest">Latest</option>
+        <option value="oldest">Oldest</option>
+        <option value="atoz">A to Z</option>
+        <option value="ztoa">Z to A</option>
+      </select>
     </div>
   );
 }
