@@ -11,11 +11,7 @@ function LeaderboardSorter({ setSortOption }: LeaderboardSorterProps) {
   return (
     <div className="uppercase text-white-100 font-black 3xl:text-2xl 4xl:text-5xl hover:text-secondary transition-colors duration-300 ease-out cursor-pointer">
       <label htmlFor="leaderboard-sort">Sort By: </label>
-      <select
-        id="leaderboard-sort"
-        className="bg-black"
-        onChange={handleSortChange}
-      >
+      <select id="leaderboard-sort" onChange={handleSortChange}>
         <option value="latest">Latest</option>
         <option value="oldest">Oldest</option>
         <option value="atoz">A to Z</option>
