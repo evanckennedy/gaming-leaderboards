@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface LeaderboardSortDropdownProps {
   value: string;
@@ -10,6 +10,7 @@ function LeaderboardSortDropdown({
   onChange,
 }: LeaderboardSortDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const options = [
     { value: "latest", label: "Latest" },
@@ -17,6 +18,25 @@ function LeaderboardSortDropdown({
     { value: "atoz", label: "A to Z" },
     { value: "ztoa", label: "Z to A" },
   ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const handleSelect = (optionValue: string) => {
     onChange(optionValue);
@@ -26,7 +46,7 @@ function LeaderboardSortDropdown({
   const toggleModal = () => setIsOpen(!isOpen);
 
   return (
-    <div className="relative z-50">
+    <div className="relative z-50" ref={dropdownRef}>
       <button
         type="button"
         onClick={toggleModal}
