@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import useSortDropdown from "../hooks/useSortDropdown";
 
 interface LeaderboardSortDropdownProps {
   value: string;
@@ -9,8 +9,8 @@ function LeaderboardSortDropdown({
   value,
   onChange,
 }: LeaderboardSortDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { isOpen, dropdownRef, toggleDropdown, closeDropdown } =
+    useSortDropdown();
 
   const options = [
     { value: "latest", label: "Latest" },
@@ -19,37 +19,16 @@ function LeaderboardSortDropdown({
     { value: "ztoa", label: "Z to A" },
   ];
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
   const handleSelect = (optionValue: string) => {
     onChange(optionValue);
-    setIsOpen(false);
+    closeDropdown();
   };
-
-  const toggleModal = () => setIsOpen(!isOpen);
 
   return (
     <div className="relative z-50" ref={dropdownRef}>
       <button
         type="button"
-        onClick={toggleModal}
+        onClick={toggleDropdown}
         className="uppercase text-white-100 3xl:text-2xl 4xl:text-5xl hover:text-secondary transition-colors duration-300 ease-out cursor-pointer"
       >
         {options.find((option) => option.value === value)?.label}
