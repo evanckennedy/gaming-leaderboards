@@ -41,7 +41,7 @@ function LeaderboardSortDropdown({
             <button
               key={option.value}
               onClick={() => handleSelect(option.value)}
-              className="block w-full text-left text-white-100 3xl:text-2xl 4xl:text-5xl hover:bg-primary-400 transition-colors duration-300 ease-out px-4 3xl:px-6 4xl:px-12 py-2 3xl:py-3 4xl:py-6"
+              className="block w-full text-left uppercase text-white-100 3xl:text-2xl 4xl:text-5xl hover:bg-primary-400 transition-colors duration-300 ease-out px-4 3xl:px-6 4xl:px-12 py-2 3xl:py-3 4xl:py-6"
             >
               {option.label}
             </button>
