@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useSortDropdown from "../hooks/useSortDropdown";
 
 interface LeaderboardSortDropdownProps {
   value: string;
@@ -9,7 +9,8 @@ function LeaderboardSortDropdown({
   value,
   onChange,
 }: LeaderboardSortDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, dropdownRef, toggleDropdown, closeDropdown } =
+    useSortDropdown();
 
   const options = [
     { value: "latest", label: "Latest" },
@@ -20,16 +21,14 @@ function LeaderboardSortDropdown({
 
   const handleSelect = (optionValue: string) => {
     onChange(optionValue);
-    setIsOpen(false);
+    closeDropdown();
   };
 
-  const toggleModal = () => setIsOpen(!isOpen);
-
   return (
-    <div className="relative z-50">
+    <div className="relative z-50" ref={dropdownRef}>
       <button
         type="button"
-        onClick={toggleModal}
+        onClick={toggleDropdown}
         className="uppercase text-white-100 3xl:text-2xl 4xl:text-5xl hover:text-secondary transition-colors duration-300 ease-out cursor-pointer"
       >
         {options.find((option) => option.value === value)?.label}
@@ -41,7 +40,7 @@ function LeaderboardSortDropdown({
             <button
               key={option.value}
               onClick={() => handleSelect(option.value)}
-              className="block w-full text-left text-white-100 3xl:text-2xl 4xl:text-5xl hover:bg-primary-400 transition-colors duration-300 ease-out px-4 3xl:px-6 4xl:px-12 py-2 3xl:py-3 4xl:py-6"
+              className="block w-full text-left uppercase text-white-100 3xl:text-2xl 4xl:text-5xl hover:bg-primary-400 transition-colors duration-300 ease-out px-4 3xl:px-6 4xl:px-12 py-2 3xl:py-3 4xl:py-6"
             >
               {option.label}
             </button>
