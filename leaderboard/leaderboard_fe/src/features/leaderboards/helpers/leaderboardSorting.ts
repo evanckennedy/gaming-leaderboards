@@ -1,4 +1,5 @@
 export interface FormattedLeaderboardData {
+  id: number;
   gameName: string;
   rawGameDate: Date;
   displayGameDate: string;
