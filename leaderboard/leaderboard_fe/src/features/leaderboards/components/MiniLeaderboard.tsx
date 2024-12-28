@@ -1,13 +1,22 @@
+import { Leaderboard } from "@/types/types";
 import { FormattedLeaderboardData } from "../helpers/leaderboardSorting";
 
 interface MiniLeaderboardProps {
   leaderboard: FormattedLeaderboardData;
   topPlayers: { fullName: string; placement: number; score: number }[];
+  onClick: () => void;
 }
 
-function MiniLeaderboard({ leaderboard, topPlayers }: MiniLeaderboardProps) {
+function MiniLeaderboard({
+  leaderboard,
+  topPlayers,
+  onClick,
+}: MiniLeaderboardProps) {
   return (
-    <div className="transform transition-transform duration-300 ease-out hover:scale-105 cursor-pointer">
+    <div
+      onClick={onClick}
+      className="transform transition-transform duration-300 ease-out hover:scale-105 cursor-pointer"
+    >
       <div className="bg-gradient-to-b from-primary-300 to-primary-400 relative flex items-center justify-center h-16 3xl:h-24 4xl:h-48">
         <p className="absolute top-0 right-0 m-1 3xl:m-1.5 4xl:m-3 text-white-200 font-light text-xs 3xl:text-lg 4xl:text-4xl">
           <span>Latest:</span>
