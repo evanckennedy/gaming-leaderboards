@@ -14,6 +14,7 @@ export function formatLeaderboardData(leaderboards: Leaderboard[]) {
     const rawDate = new Date(leaderboard.gameDate);
 
     return {
+      id: leaderboard.id,
       gameName: leaderboard.game.name,
       // Store the raw date for sorting
       rawGameDate: rawDate,
