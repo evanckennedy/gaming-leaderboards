@@ -1,23 +1,20 @@
+import { FormattedLeaderboardData } from "../helpers/leaderboardSorting";
+
 interface MiniLeaderboardProps {
-  title: string;
-  sessionDate: string;
-  players: { fullName: string; placement: number; score: number }[];
+  leaderboard: FormattedLeaderboardData;
+  topPlayers: { fullName: string; placement: number; score: number }[];
 }
 
-function MiniLeaderboard({
-  title,
-  sessionDate,
-  players,
-}: MiniLeaderboardProps) {
+function MiniLeaderboard({ leaderboard, topPlayers }: MiniLeaderboardProps) {
   return (
     <div className="transform transition-transform duration-300 ease-out hover:scale-105 cursor-pointer">
       <div className="bg-gradient-to-b from-primary-300 to-primary-400 relative flex items-center justify-center h-16 3xl:h-24 4xl:h-48">
         <p className="absolute top-0 right-0 m-1 3xl:m-1.5 4xl:m-3 text-white-200 font-light text-xs 3xl:text-lg 4xl:text-4xl">
           <span>Latest:</span>
-          <span> {sessionDate}</span>
+          <span> {leaderboard.displayGameDate}</span>
         </p>
         <h3 className="text-center px-4 3xl:px-4 4xl:px-9 text-white-100 font-black text-xl 3xl:text-3xl 4xl:text-6xl truncate">
-          {title}
+          {leaderboard.gameName}
         </h3>
       </div>
       <div className="bg-primary-100 pb-4 3xl:pb-6 4xl:pb-12">
@@ -32,7 +29,7 @@ function MiniLeaderboard({
             </tr>
           </thead>
           <tbody>
-            {players.map((player) => (
+            {topPlayers.map((player) => (
               <tr
                 key={player.placement}
                 className="odd:bg-primary-200 even:bg-primary-100"
