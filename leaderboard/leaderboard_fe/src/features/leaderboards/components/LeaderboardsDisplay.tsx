@@ -1,20 +1,15 @@
 import MiniLeaderboard from "./MiniLeaderboard";
 import { FormattedLeaderboardData } from "../helpers/leaderboardSorting";
-import { useState } from "react";
 import FullLeaderboardModal from "./FullLeaderboardModal";
+import useSelectedLeaderboard from "../hooks/useSelectedLeaderboard";
 
 interface LeaderboardsDisplayProps {
   sortedLeaderboards: FormattedLeaderboardData[];
 }
 
 function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
-  const [selectedLeaderboard, setSelectedLeaderboard] =
-    useState<FormattedLeaderboardData | null>();
-
-  const handleMiniClick = (leaderboard: FormattedLeaderboardData) => {
-    setSelectedLeaderboard(leaderboard);
-  };
-
+  const { selectedLeaderboard, selectLeaderboard, clearSelectedLeaderboard } =
+    useSelectedLeaderboard();
   return (
     <>
       <div className="grid grid-cols-3 gap-6 3xl:gap-9 4xl:gap-20">
@@ -38,7 +33,7 @@ function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
               key={leaderboard.id}
               leaderboard={leaderboard}
               topPlayers={topPlayers}
-              onClick={() => handleMiniClick(leaderboard)}
+              onClick={() => selectLeaderboard(leaderboard)}
             />
           );
         })}
@@ -46,7 +41,7 @@ function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
       {selectedLeaderboard && (
         <FullLeaderboardModal
           leaderboard={selectedLeaderboard}
-          onClose={() => setSelectedLeaderboard(null)}
+          onClose={clearSelectedLeaderboard}
         />
       )}
     </>
