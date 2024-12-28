@@ -8,7 +8,7 @@ interface LeaderboardsDisplayProps {
 function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
   return (
     <div className="grid grid-cols-3 gap-6 3xl:gap-9 4xl:gap-20">
-      {sortedLeaderboards.map((leaderboard, index) => {
+      {sortedLeaderboards.map((leaderboard) => {
         const topPlayers = leaderboard.players
           .sort((a, b) => a.placement - b.placement)
           .slice(0, 3); // Take the top 3 players
@@ -25,10 +25,9 @@ function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
 
         return (
           <MiniLeaderboard
-            key={index}
-            title={leaderboard.gameName}
-            sessionDate={leaderboard.displayGameDate}
-            players={topPlayers}
+            key={leaderboard.id}
+            leaderboard={leaderboard}
+            topPlayers={topPlayers}
           />
         );
       })}
