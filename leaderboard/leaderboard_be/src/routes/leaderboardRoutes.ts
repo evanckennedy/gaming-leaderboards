@@ -21,7 +21,7 @@ router.post(
 router.get("/leaderboards", getLeaderboards);
 
 // DELETE route for deleting a leaderboard by sessionId
-router.get(
+router.delete(
   "/leaderboards/:id",
   verifyToken,
   checkRole(["Root"]),
