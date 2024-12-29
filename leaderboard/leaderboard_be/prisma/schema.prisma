@@ -67,7 +67,7 @@ model SessionPlayer {
   playerId  Int     @map("player_id")
   score     Int?
   placement Int
-  session   Session @relation(fields: [sessionId], references: [id])
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   player    Player  @relation(fields: [playerId], references: [id])
   
   @@map("session_player")
