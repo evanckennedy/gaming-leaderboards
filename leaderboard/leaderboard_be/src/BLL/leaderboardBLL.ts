@@ -2,6 +2,7 @@ import { LeaderboardFormValues } from "../types/types";
 import {
   createLeaderboardDAL,
   getLeaderboardsDAL,
+  deleteLeaderboardDAL,
 } from "../DAL/leaderboardDAL";
 
 /**
@@ -16,4 +17,11 @@ export async function createLeaderboardBLL(data: LeaderboardFormValues) {
  */
 export async function getLeaderboardsBLL() {
   return await getLeaderboardsDAL();
+}
+
+/**
+ * Handles the business logic for deleting a leaderboard.
+ */
+export async function deleteLeaderboardBLL(sessionId: number) {
+  return await deleteLeaderboardDAL(sessionId);
 }
