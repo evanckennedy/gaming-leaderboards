@@ -119,3 +119,17 @@ export async function getLeaderboardsDAL() {
     },
   });
 }
+
+/**
+ * Deletes a leaderboard (session) by ID.
+ *
+ * With cascade deletes configured, the associated sessionPlayer records
+ * will automatically be removed when the Session is deleted.
+ */
+export async function deleteLeaderboardDAL(sessionId: number) {
+  const deletedSession = await prisma.session.delete({
+    where: { id: sessionId },
+  });
+
+  return deletedSession;
+}
