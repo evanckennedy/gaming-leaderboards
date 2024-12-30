@@ -7,19 +7,23 @@ export function useFetchLeaderboards() {
     ReturnType<typeof formatLeaderboardData>
   >([]);
 
-  useEffect(() => {
-    const getLeaderboards = async () => {
-      try {
-        const data = await fetchLeaderboards();
-        const formattedData = formatLeaderboardData(data);
-        setLeaderboards(formattedData);
-      } catch (error) {
-        console.error("Error fetching leaderboards", error);
-      }
-    };
+  async function getLeaderboards() {
+    try {
+      const data = await fetchLeaderboards();
+      const formattedData = formatLeaderboardData(data);
+      setLeaderboards(formattedData);
+    } catch (error) {
+      console.error("Error fetching leaderboards", error);
+    }
+  }
 
+  useEffect(() => {
     getLeaderboards();
   }, []);
 
-  return { leaderboards };
+  const refreshLeaderboards = async () => {
+    await getLeaderboards();
+  };
+
+  return { leaderboards, refreshLeaderboards };
 }
