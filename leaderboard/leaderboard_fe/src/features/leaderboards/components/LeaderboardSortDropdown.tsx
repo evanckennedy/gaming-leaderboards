@@ -25,7 +25,7 @@ function LeaderboardSortDropdown({
   };
 
   return (
-    <div className="relative z-50" ref={dropdownRef}>
+    <div className="relative z-10" ref={dropdownRef}>
       <button
         type="button"
         onClick={toggleDropdown}
