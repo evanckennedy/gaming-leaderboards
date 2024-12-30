@@ -5,11 +5,19 @@ import useSelectedLeaderboard from "../hooks/useSelectedLeaderboard";
 
 interface LeaderboardsDisplayProps {
   sortedLeaderboards: FormattedLeaderboardData[];
+  refreshLeaderboards?: () => Promise<void>;
 }
 
-function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
-  const { selectedLeaderboard, selectLeaderboard, clearSelectedLeaderboard } =
-    useSelectedLeaderboard();
+function LeaderboardsDisplay({
+  sortedLeaderboards,
+  refreshLeaderboards,
+}: LeaderboardsDisplayProps) {
+  const {
+    selectedLeaderboard,
+    selectLeaderboard,
+    clearSelectedLeaderboard,
+    handleConfirmDelete,
+  } = useSelectedLeaderboard(refreshLeaderboards);
   return (
     <>
       <div className="grid grid-cols-3 gap-6 3xl:gap-9 4xl:gap-20">
@@ -42,6 +50,7 @@ function LeaderboardsDisplay({ sortedLeaderboards }: LeaderboardsDisplayProps) {
         <FullLeaderboardModal
           leaderboard={selectedLeaderboard}
           onClose={clearSelectedLeaderboard}
+          handleConfirmDelete={handleConfirmDelete}
         />
       )}
     </>
