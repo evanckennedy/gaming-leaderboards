@@ -1,5 +1,5 @@
 import { FormattedLeaderboardData } from "../helpers/leaderboardSorting";
-import { useSelector, UseSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import IconTrash from "@/components/ui/icons/IconTrash";
 
