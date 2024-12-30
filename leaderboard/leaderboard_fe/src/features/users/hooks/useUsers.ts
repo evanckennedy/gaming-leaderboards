@@ -14,11 +14,22 @@ export const useUsers = () => {
   const [isEditRoleModalOpen, setIsEditRoleModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
+  // Sorting order for roles
+  const roleOrder: { [key: string]: number } = {
+    Root: 1,
+    Create: 2,
+    Viewer: 3,
+  };
+
   useEffect(() => {
     const getUsers = async () => {
       try {
         const data = await fetchUsers();
-        setUsers(data);
+        // Sort users based on the role order
+        const sortedUsers = data.sort((a, b) => {
+          return roleOrder[a.role.roleName] - roleOrder[b.role.roleName];
+        });
+        setUsers(sortedUsers);
       } catch (error) {
         console.error("Error fetching users", error);
       }
@@ -88,7 +99,11 @@ export const useUsers = () => {
             { ...user, roleId, role: { roleName } }
           : user,
         );
-        setUsers(updatedUsers);
+        // Sort users again after editing the role
+        const sortedUsers = updatedUsers.sort((a, b) => {
+          return roleOrder[a.role.roleName] - roleOrder[b.role.roleName];
+        });
+        setUsers(sortedUsers);
       } catch (error) {
         console.error("Error editing role", error);
       } finally {

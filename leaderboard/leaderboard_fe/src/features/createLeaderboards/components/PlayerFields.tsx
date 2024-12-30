@@ -52,7 +52,7 @@ export default function PlayerFields() {
                     <Field
                       type="text"
                       name={`players.${index}.name`}
-                      placeholder="Search Player Names"
+                      placeholder="Enter the player name"
                       className={`col-span-6 px-3 3xl:px-5 4xl:px-9 bg-primary-200 text-white-100
                     3xl:text-2xl 4xl:text-5xl border-2 3xl:border-4 4xl:border-8
                     font-medium shadow-inner-custom-base 3xl:shadow-inner-custom-1080
