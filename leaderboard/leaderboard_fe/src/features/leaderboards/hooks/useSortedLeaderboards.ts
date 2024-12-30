@@ -9,7 +9,7 @@ import {
 } from "../helpers/leaderboardSorting";
 
 export function useSortedLeaderboards() {
-  const { leaderboards } = useFetchLeaderboards();
+  const { leaderboards, refreshLeaderboards } = useFetchLeaderboards();
   const [sortedLeaderboards, setSortedLeaderboards] =
     useState<FormattedLeaderboardData[]>(leaderboards);
   const [sortOption, setSortOption] = useState("latest");
@@ -35,5 +35,5 @@ export function useSortedLeaderboards() {
     setSortedLeaderboards(sortedData);
   }, [leaderboards, sortOption]);
 
-  return { sortedLeaderboards, setSortOption };
+  return { sortedLeaderboards, setSortOption, refreshLeaderboards };
 }
