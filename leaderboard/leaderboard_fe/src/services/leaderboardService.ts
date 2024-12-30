@@ -27,3 +27,7 @@ export async function createLeaderboard(
   const response = await apiClient.post(`/api/leaderboards`, submissionValues);
   return response.data;
 }
+
+export async function deleteLeaderboard(sessionId: number) {
+  return apiClient.delete(`/api/leaderboards/${sessionId}`);
+}
