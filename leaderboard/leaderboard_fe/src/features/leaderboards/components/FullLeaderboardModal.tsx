@@ -24,7 +24,7 @@ function FullLeaderboardModal({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50"
+      className="fixed inset-0 flex items-center justify-center bg-black-100 bg-opacity-50 z-20"
       onClick={onClose}
     >
       <div
