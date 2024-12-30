@@ -4,7 +4,8 @@ import CreateLeaderboardLink from "./CreateLeaderboardLink";
 import { useSortedLeaderboards } from "../hooks/useSortedLeaderboards";
 
 function LeaderboardsContainer() {
-  const { sortedLeaderboards, setSortOption } = useSortedLeaderboards();
+  const { sortedLeaderboards, setSortOption, refreshLeaderboards } =
+    useSortedLeaderboards();
 
   return (
     <>
@@ -12,7 +13,10 @@ function LeaderboardsContainer() {
         <LeaderboardSorter setSortOption={setSortOption} />
         <CreateLeaderboardLink />
       </div>
-      <LeaderboardsDisplay sortedLeaderboards={sortedLeaderboards} />
+      <LeaderboardsDisplay
+        sortedLeaderboards={sortedLeaderboards}
+        refreshLeaderboards={refreshLeaderboards}
+      />
     </>
   );
 }
