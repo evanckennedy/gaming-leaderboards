@@ -2,6 +2,17 @@
 
 Gaming Leaderboards is a web application designed to manage and display leaderboards for various games. It allows users to create, view, and manage leaderboards, including adding players and their scores. The application is built with a modern tech stack, including React for the frontend, Node.js and Express for the backend, and PostgreSQL for the database. It also leverages Docker for containerization and Prisma as the ORM for database interactions.
 
+## Table of Contents
+
+- [User Roles and Privileges](#user-roles-and-privileges)
+- [Root User Login Credentials](#root-user-login-credentials)
+- [Demo](#demo)
+- [Local Development Setup](#local-development-setup)
+- [Registering the Server in pgAdmin](#registering-the-server-in-pgadmin)
+- [Responsiveness Guide](#responsiveness-guide)
+- [Docker Environment Setup](#docker-environment-setup)
+- [Deployment Configuration](#deployment-configuration)
+
 ## User Roles and Privileges
 
 The application supports three user roles, each with specific privileges:
