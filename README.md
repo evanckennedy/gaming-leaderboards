@@ -23,7 +23,7 @@ The application supports three user roles, each with specific privileges:
 
 ## Root User Login Credentials
 
-During the initial setup, a root user is automatically seeded into the database via a seed script that runs during the database initialization. The default credentials are:
+A root user is automatically seeded into the database via a seed script that runs during the database initialization. The default credentials are:
 
 - **Email**: `root@root.com`
 - **Password**: `rootpassword`
