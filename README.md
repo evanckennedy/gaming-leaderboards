@@ -117,3 +117,29 @@ To stop and remove the containers and services from the development environment,
 ```
 docker compose -f compose.yaml -f compose.dev.yaml down
 ```
+
+## Deployment Configuration
+
+If you want to deploy this application to a production environment:
+
+1. **Set the production URL** in the `compose.yaml` file:
+   ```yaml
+   frontend:
+     container_name: frontend_container
+     build:
+       context: ./leaderboard/leaderboard_fe
+       dockerfile: Dockerfile
+       args:
+         VITE_API_BASE_URL: http://your-new-production-url:8234
+     ports:
+       - "5173:80"
+     depends_on:
+       - backend
+   ```
+2. **Update `.env.production`** in the frontend directory to match your production URL:
+   ```bash
+   # filepath: /leaderboard/leaderboard_fe/.env.production
+   VITE_API_BASE_URL=http://your-new-production-url:8234
+   ```
+
+Make sure these values match your actual backend server, so the frontend can properly connect to your production API.
