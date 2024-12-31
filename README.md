@@ -1,4 +1,36 @@
-# Leaderboard Project
+# Gaming Leaderboards
+
+Gaming Leaderboards is a web application designed to manage and display leaderboards for various games. It allows users to create, view, and manage leaderboards, including adding players and their scores. The application is built with a modern tech stack, including React for the frontend, Node.js and Express for the backend, and PostgreSQL for the database. It also leverages Docker for containerization and Prisma as the ORM for database interactions.
+
+## Table of Contents
+
+- [User Roles and Privileges](#user-roles-and-privileges)
+- [Root User Login Credentials](#root-user-login-credentials)
+- [Demo](#demo)
+- [Local Development Setup](#local-development-setup)
+- [Registering the Server in pgAdmin](#registering-the-server-in-pgadmin)
+- [Responsiveness Guide](#responsiveness-guide)
+- [Docker Environment Setup](#docker-environment-setup)
+- [Deployment Configuration](#deployment-configuration)
+
+## User Roles and Privileges
+
+The application supports three user roles, each with specific privileges:
+
+- **Root**: Has full access to all features, including creating and deleting leaderboards, deleting users, editing passwords, and modifying user roles.
+- **Create**: Can create and view leaderboards.
+- **Viewer**: Can view leaderboards but cannot make any changes.
+
+## Root User Login Credentials
+
+A root user is automatically seeded into the database via a seed script that runs during the database initialization. The default credentials are:
+
+- **Email**: `root@root.com`
+- **Password**: `rootpassword`
+
+## Demo
+
+Check out the [video demo](https://www.youtube.com/watch?v=qjEBHYP4sJM) to see Gaming Leaderboards in action!
 
 ## Local Development Setup
 To install all dependencies for this project with one command, use the following command in the root directory:
@@ -53,13 +85,6 @@ This command will automatically install dependencies in:
 2. Click to expand the server dropdown, and then expand the Databases dropdown. You should see `leaderboard_db` listed there.
 
 **Note:** The **pgAdmin** service is configured to persist its data using a Docker volume, so you only need to register the PostgreSQL server once. The server registration and other pgAdmin settings will persist between restarts of the Docker containers.
-
-## Root User Login Credentials
-
-The root user for the leaderboard project has the following credentials:
-
-- **Email**: `root@root.com`
-- **Password**: `rootpassword`
 
 ## Responsiveness Guide
 
@@ -117,3 +142,29 @@ To stop and remove the containers and services from the development environment,
 ```
 docker compose -f compose.yaml -f compose.dev.yaml down
 ```
+
+## Deployment Configuration
+
+If you want to deploy this application to a production environment:
+
+1. **Set the production URL** in the `compose.yaml` file:
+   ```yaml
+   frontend:
+     container_name: frontend_container
+     build:
+       context: ./leaderboard/leaderboard_fe
+       dockerfile: Dockerfile
+       args:
+         VITE_API_BASE_URL: http://your-new-production-url:8234
+     ports:
+       - "5173:80"
+     depends_on:
+       - backend
+   ```
+2. **Update `.env.production`** in the frontend directory to match your production URL:
+   ```bash
+   # filepath: /leaderboard/leaderboard_fe/.env.production
+   VITE_API_BASE_URL=http://your-new-production-url:8234
+   ```
+
+Make sure these values match your actual backend server, so the frontend can properly connect to your production API.
