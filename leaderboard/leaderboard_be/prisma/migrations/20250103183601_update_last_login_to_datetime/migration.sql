@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "user" ALTER COLUMN "last_login" SET DATA TYPE TIMESTAMP(3);

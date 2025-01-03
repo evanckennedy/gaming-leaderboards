@@ -89,7 +89,7 @@ model User {
   email             String   @unique @db.VarChar(100)
   passwordHash      String   @map("password_hash")
   accessFailedCount Int      @map("access_failed_count") @default(0)
-  lastLogin         DateTime @map("last_login") @default(now()) @db.Date 
+  lastLogin         DateTime @map("last_login") @default(now())
   lockedOut         Boolean  @map("locked_out") @default(false)
   role              Role     @relation(fields: [roleId], references: [id])
 
