@@ -7,6 +7,7 @@ Gaming Leaderboards is a web application designed to manage and display leaderbo
 - [User Roles and Privileges](#user-roles-and-privileges)
 - [Root User Login Credentials](#root-user-login-credentials)
 - [Demo](#demo)
+- [Database Schema](#database-schema)
 - [Local Development Setup](#local-development-setup)
 - [Registering the Server in pgAdmin](#registering-the-server-in-pgadmin)
 - [Responsiveness Guide](#responsiveness-guide)
@@ -31,6 +32,12 @@ A root user is automatically seeded into the database via a seed script that run
 ## Demo
 
 Check out the [video demo](https://www.youtube.com/watch?v=qjEBHYP4sJM) to see Gaming Leaderboards in action!
+
+## Database Schema
+
+Below is the Entity Relationship (ER) diagram showing the database structure of the application:
+
+![Database ER Diagram](./docs/ERD.png)
 
 ## Local Development Setup
 To install all dependencies for this project with one command, use the following command in the root directory:
